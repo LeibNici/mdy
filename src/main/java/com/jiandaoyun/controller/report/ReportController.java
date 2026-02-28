@@ -1,4 +1,4 @@
-﻿package com.jiandaoyun.controller.report;
+package com.jiandaoyun.controller.report;
 
 import com.jiandaoyun.common.model.ApiResponse;
 import java.util.Map;

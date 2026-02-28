@@ -1,4 +1,4 @@
-﻿package com.jiandaoyun.common.enums;
+package com.jiandaoyun.common.enums;
 
 public enum FormStatus {
     ACTIVE,

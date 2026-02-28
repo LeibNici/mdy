@@ -1,4 +1,4 @@
-﻿package com.jiandaoyun.common.exception;
+package com.jiandaoyun.common.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

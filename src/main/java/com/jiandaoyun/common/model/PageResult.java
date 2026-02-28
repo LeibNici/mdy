@@ -1,4 +1,4 @@
-﻿package com.jiandaoyun.common.model;
+package com.jiandaoyun.common.model;
 
 import java.util.List;
 import lombok.Data;

@@ -1,4 +1,4 @@
-﻿package com.jiandaoyun.repository.mysql;
+package com.jiandaoyun.repository.mysql;
 
 public interface WorkflowRepository {
 }

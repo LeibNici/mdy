@@ -1,4 +1,4 @@
-﻿package com.jiandaoyun.service.file;
+package com.jiandaoyun.service.file;
 
 public interface FileService {
 }

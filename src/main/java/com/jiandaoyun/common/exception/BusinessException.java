@@ -1,4 +1,4 @@
-﻿package com.jiandaoyun.common.exception;
+package com.jiandaoyun.common.exception;
 
 public class BusinessException extends RuntimeException {
     public BusinessException(String message) {

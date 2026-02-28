@@ -1,4 +1,4 @@
-﻿package com.jiandaoyun.common.annotation;
+package com.jiandaoyun.common.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

@@ -1,4 +1,4 @@
-﻿package com.jiandaoyun.domain.tenant;
+package com.jiandaoyun.domain.tenant;
 
 public class TenantUser {
 }

@@ -1,4 +1,4 @@
-﻿package com.jiandaoyun.controller.auth;
+package com.jiandaoyun.controller.auth;
 
 import com.jiandaoyun.common.model.ApiResponse;
 import java.util.Map;

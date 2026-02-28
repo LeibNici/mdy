@@ -1,4 +1,4 @@
-﻿package com.jiandaoyun.service.report;
+package com.jiandaoyun.service.report;
 
 public interface ReportService {
 }

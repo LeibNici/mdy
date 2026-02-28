@@ -1,4 +1,4 @@
-﻿package com.jiandaoyun.common.exception;
+package com.jiandaoyun.common.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,4 +1,4 @@
-﻿package com.jiandaoyun.domain.workflow;
+package com.jiandaoyun.domain.workflow;
 
 public class WorkflowInstance {
 }

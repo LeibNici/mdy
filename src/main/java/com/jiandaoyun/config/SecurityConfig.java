@@ -1,4 +1,4 @@
-﻿package com.jiandaoyun.config;
+package com.jiandaoyun.config;
 
 public class SecurityConfig {
 }

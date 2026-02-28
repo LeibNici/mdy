@@ -1,4 +1,4 @@
-﻿package com.jiandaoyun.repository.redis;
+package com.jiandaoyun.repository.redis;
 
 public interface RedisRepository {
 }

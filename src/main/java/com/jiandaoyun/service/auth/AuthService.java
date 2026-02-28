@@ -1,4 +1,4 @@
-﻿package com.jiandaoyun.service.auth;
+package com.jiandaoyun.service.auth;
 
 public interface AuthService {
 }

@@ -1,4 +1,4 @@
-﻿package com.jiandaoyun.common.utils;
+package com.jiandaoyun.common.utils;
 
 public class JsonUtil {
 }

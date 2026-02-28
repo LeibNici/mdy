@@ -1,4 +1,4 @@
-﻿package com.jiandaoyun.dto.response;
+package com.jiandaoyun.dto.response;
 
 public class BaseResponse {
 }

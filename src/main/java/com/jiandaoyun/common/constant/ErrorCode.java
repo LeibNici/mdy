@@ -1,4 +1,4 @@
-﻿package com.jiandaoyun.common.constant;
+package com.jiandaoyun.common.constant;
 
 public final class ErrorCode {
     public static final int SUCCESS = 200;

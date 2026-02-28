@@ -1,4 +1,4 @@
-﻿package com.jiandaoyun.common.aspect;
+package com.jiandaoyun.common.aspect;
 
 public class TenantAspect {
 }

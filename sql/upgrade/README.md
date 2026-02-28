@@ -1,1 +1,1 @@
-﻿Place SQL upgrade scripts in this directory.
+Place SQL upgrade scripts in this directory.

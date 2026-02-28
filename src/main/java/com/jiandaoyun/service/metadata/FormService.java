@@ -1,4 +1,4 @@
-﻿package com.jiandaoyun.service.metadata;
+package com.jiandaoyun.service.metadata;
 
 public interface FormService {
 }

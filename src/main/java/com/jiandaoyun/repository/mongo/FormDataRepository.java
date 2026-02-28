@@ -1,4 +1,4 @@
-﻿package com.jiandaoyun.repository.mongo;
+package com.jiandaoyun.repository.mongo;
 
 public interface FormDataRepository {
 }

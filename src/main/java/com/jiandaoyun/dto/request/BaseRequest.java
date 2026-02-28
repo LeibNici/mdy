@@ -1,4 +1,4 @@
-﻿package com.jiandaoyun.dto.request;
+package com.jiandaoyun.dto.request;
 
 public class BaseRequest {
 }

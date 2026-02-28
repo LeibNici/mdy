@@ -1,4 +1,4 @@
-﻿package com.jiandaoyun.service.auth;
+package com.jiandaoyun.service.auth;
 
 import org.springframework.stereotype.Service;
 

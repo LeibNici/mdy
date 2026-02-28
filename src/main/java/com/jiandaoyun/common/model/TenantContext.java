@@ -1,4 +1,4 @@
-﻿package com.jiandaoyun.common.model;
+package com.jiandaoyun.common.model;
 
 public final class TenantContext {
     private static final ThreadLocal<String> TENANT = new ThreadLocal<>();

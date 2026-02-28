@@ -1,4 +1,4 @@
-﻿package com.jiandaoyun.common.constant;
+package com.jiandaoyun.common.constant;
 
 public enum FieldType {
     ACTIVE,

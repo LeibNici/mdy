@@ -1,4 +1,4 @@
-﻿package com.jiandaoyun.core.storage;
+package com.jiandaoyun.core.storage;
 
 public class MongoStorage {
 }
