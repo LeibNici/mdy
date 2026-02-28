@@ -14,34 +14,32 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 鐞涖劌宕熼崗鍐╂殶閹诡喗甯堕崚璺烘珤閵? *
+ * 表单控制器.
  *
- * @author Codex
+ * @author chenming
  *
  * @since 2026/02/28
  */
 @RestController
 @RequestMapping("/api/forms")
-
 public class FormController {
 
     private final FormService formService;
 
     /**
-     * 閺嬪嫰鈧姴鍤遍弫鑸偓?     *
- *
- * @param formService 鐞涖劌宕熼張宥呭
+     * 构造表单控制器实例.
+     *
+     * @param formService 表单服务实例.
      */
     public FormController(FormService formService) {
         this.formService = formService;
     }
 
     /**
-     * 閸掓稑缂撶悰銊ュ礋鐎规矮绠熼妴?     *
- *
- * @param request 閸掓稑缂撶拠閿嬬湴
- *
- * @return 閸掓稑缂撻崥搴ｆ畱鐞涖劌宕熺€规矮绠?
+     * 创建表单定义.
+     *
+     * @param request 创建表单请求.
+     * @return 新建的表单定义.
      */
     @PostMapping
     public ApiResponse<FormDefinition> create(@Valid @RequestBody CreateFormRequest request) {
@@ -49,11 +47,10 @@ public class FormController {
     }
 
     /**
-     * 閹?ID 閼惧嘲褰囩悰銊ュ礋鐎规矮绠熼妴?     *
- *
- * @param formId 鐞涖劌宕?ID
- *
- * @return 鐞涖劌宕熺€规矮绠?
+     * 根据标识查询表单定义.
+     *
+     * @param formId 表单标识.
+     * @return 表单定义.
      */
     @GetMapping("/{formId}")
     public ApiResponse<FormDefinition> getById(@PathVariable String formId) {
@@ -61,9 +58,9 @@ public class FormController {
     }
 
     /**
-     * 閺屻儴顕楅崗銊╁劥鐞涖劌宕熺€规矮绠熼妴?     *
- *
- * @return 鐞涖劌宕熺€规矮绠熼崚妤勩€?
+     * 查询全部表单定义.
+     *
+     * @return 表单定义列表.
      */
     @GetMapping
     public ApiResponse<List<FormDefinition>> listAll() {

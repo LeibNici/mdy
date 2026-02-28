@@ -1,9 +1,9 @@
 package com.jiandaoyun.core.storage;
 
 /**
- * MySQLStorage 绫诲瀷瀹氫箟.
+ * MySQL存储类型.
  *
- * @author Codex
+ * @author chenming
  *
  * @since 2026/02/28
  */

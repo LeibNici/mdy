@@ -1,9 +1,9 @@
 package com.jiandaoyun.common.aspect;
 
 /**
- * LogAspect 绫诲瀷瀹氫箟.
+ * 日志切面.
  *
- * @author Codex
+ * @author chenming
  *
  * @since 2026/02/28
  */

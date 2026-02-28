@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 瀛楁妯″潡鎺у埗鍣?
+ * 字段控制器.
  *
- * @author Codex
+ * @author chenming
  *
  * @since 2026/02/28
  */
@@ -18,9 +18,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class FieldController {
 
     /**
-     * 鍋ュ悍妫€鏌ユ帴鍙?
+     * 执行健康检查.
      *
- * @return 鍋ュ悍鐘舵€? */
+     * @return 处理结果.
+     */
     @GetMapping("/health")
     public ApiResponse<Map<String, String>> health() {
         return ApiResponse.ok(Map.of("status", "ok"));

@@ -1,9 +1,9 @@
 package com.jiandaoyun.repository.mysql;
 
 /**
- * WorkflowRepository 绫诲瀷瀹氫箟.
+ * 工作流仓储接口.
  *
- * @author Codex
+ * @author chenming
  *
  * @since 2026/02/28
  */

@@ -1,9 +1,9 @@
 package com.jiandaoyun.domain.workflow;
 
 /**
- * WorkflowDefinition 绫诲瀷瀹氫箟.
+ * 工作流定义类型.
  *
- * @author Codex
+ * @author chenming
  *
  * @since 2026/02/28
  */

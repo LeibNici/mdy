@@ -1,9 +1,9 @@
 package com.jiandaoyun.common.utils;
 
 /**
- * PasswordUtil 绫诲瀷瀹氫箟.
+ * 密码工具类.
  *
- * @author Codex
+ * @author chenming
  *
  * @since 2026/02/28
  */

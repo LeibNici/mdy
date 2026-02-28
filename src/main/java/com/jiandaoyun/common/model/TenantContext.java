@@ -1,9 +1,9 @@
 package com.jiandaoyun.common.model;
 
 /**
- * 绉熸埛涓婁笅鏂囧鍣?
+ * 租户上下文类型.
  *
- * @author Codex
+ * @author chenming
  *
  * @since 2026/02/28
  */
@@ -15,25 +15,25 @@ public final class TenantContext {
     }
 
     /**
-     * 璁剧疆褰撳墠绉熸埛.
+     * 执行set租户ID操作.
      *
- * @param tenantId 绉熸埛 ID
+     * @param tenantId 租户标识.
      */
     public static void setTenantId(String tenantId) {
         TENANT.set(tenantId);
     }
 
     /**
-     * 鑾峰彇褰撳墠绉熸埛.
+     * 获取租户ID.
      *
- * @return 绉熸埛 ID
+     * @return 字符串结果.
      */
     public static String getTenantId() {
         return TENANT.get();
     }
 
     /**
-     * 娓呯悊绉熸埛涓婁笅鏂?
+     * 执行clear操作.
      */
     public static void clear() {
         TENANT.remove();

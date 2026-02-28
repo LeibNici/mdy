@@ -7,9 +7,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * 鐞涖劌宕熺€涙顔岄崗鍐╂殶閹诡喖鐣炬稊澶堚偓? *
+ * 字段定义类型.
  *
- * @author Codex
+ * @author chenming
  *
  * @since 2026/02/28
  */

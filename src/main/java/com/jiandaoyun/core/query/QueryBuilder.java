@@ -1,9 +1,9 @@
 package com.jiandaoyun.core.query;
 
 /**
- * QueryBuilder 绫诲瀷瀹氫箟.
+ * 查询Builder接口定义.
  *
- * @author Codex
+ * @author chenming
  *
  * @since 2026/02/28
  */

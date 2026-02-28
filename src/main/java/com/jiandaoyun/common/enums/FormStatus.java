@@ -1,19 +1,25 @@
 package com.jiandaoyun.common.enums;
 
 /**
- * 琛ㄥ崟鐘舵€佹灇涓?
+ * 表单状态枚举定义.
  *
- * @author Codex
+ * @author chenming
  *
  * @since 2026/02/28
  */
 public enum FormStatus {
-    /** 鑽夌. */
+    /**
+     * DRAFT字段.
+     */
     DRAFT,
 
-    /** 宸插彂甯? */
+    /**
+     * PUBLISHED字段.
+     */
     PUBLISHED,
 
-    /** 宸插綊妗? */
+    /**
+     * 字段说明.
+     */
     ARCHIVED
 }

@@ -1,9 +1,9 @@
 package com.jiandaoyun.core.query;
 
 /**
- * MongoQueryBuilder 绫诲瀷瀹氫箟.
+ * MongoDB查询Builder类型.
  *
- * @author Codex
+ * @author chenming
  *
  * @since 2026/02/28
  */

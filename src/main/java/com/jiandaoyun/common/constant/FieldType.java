@@ -1,22 +1,30 @@
 package com.jiandaoyun.common.constant;
 
 /**
- * 瀛楁绫诲瀷鏋氫妇.
+ * 字段类型枚举定义.
  *
- * @author Codex
+ * @author chenming
  *
  * @since 2026/02/28
  */
 public enum FieldType {
-    /** 鏂囨湰绫诲瀷. */
+    /**
+     * TEXT字段.
+     */
     TEXT,
 
-    /** 鏁板€肩被鍨? */
+    /**
+     * NUMBER字段.
+     */
     NUMBER,
 
-    /** 甯冨皵绫诲瀷. */
+    /**
+     * BOOLEAN字段.
+     */
     BOOLEAN,
 
-    /** 鏃ユ湡绫诲瀷. */
+    /**
+     * 字段说明.
+     */
     DATE
 }

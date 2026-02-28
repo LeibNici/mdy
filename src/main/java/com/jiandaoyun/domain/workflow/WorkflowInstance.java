@@ -8,9 +8,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * 閸楁洘娼稉姘閺佺増宓佺€电懓绨查惃鍕ウ缁嬪鐤勬笟瀣ㄢ偓? *
+ * 工作流实例类型.
  *
- * @author Codex
+ * @author chenming
  *
  * @since 2026/02/28
  */

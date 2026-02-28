@@ -1,19 +1,25 @@
 package com.jiandaoyun.common.enums;
 
 /**
- * 鐢ㄦ埛鐘舵€佹灇涓?
+ * 用户状态枚举定义.
  *
- * @author Codex
+ * @author chenming
  *
  * @since 2026/02/28
  */
 public enum UserStatus {
-    /** 鍚敤. */
+    /**
+     * ACTIVE字段.
+     */
     ACTIVE,
 
-    /** 绂佺敤. */
+    /**
+     * DISABLED字段.
+     */
     DISABLED,
 
-    /** 閿佸畾. */
+    /**
+     * 字段说明.
+     */
     LOCKED
 }

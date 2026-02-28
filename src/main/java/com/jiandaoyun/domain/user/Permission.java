@@ -1,9 +1,9 @@
 package com.jiandaoyun.domain.user;
 
 /**
- * Permission 绫诲瀷瀹氫箟.
+ * 权限类型.
  *
- * @author Codex
+ * @author chenming
  *
  * @since 2026/02/28
  */

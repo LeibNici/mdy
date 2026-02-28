@@ -1,9 +1,9 @@
 package com.jiandaoyun.core.metadata;
 
 /**
- * ValidatorRegistry 绫诲瀷瀹氫箟.
+ * 校验注册中心.
  *
- * @author Codex
+ * @author chenming
  *
  * @since 2026/02/28
  */

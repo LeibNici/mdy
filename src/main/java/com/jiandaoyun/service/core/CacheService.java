@@ -1,9 +1,9 @@
 package com.jiandaoyun.service.core;
 
 /**
- * CacheService 绫诲瀷瀹氫箟.
+ * 缓存服务接口.
  *
- * @author Codex
+ * @author chenming
  *
  * @since 2026/02/28
  */

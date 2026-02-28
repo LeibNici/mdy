@@ -7,9 +7,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * 濞翠胶鈻肩€圭偘绶ユ稉顓犳畱娴犺濮熼懞鍌滃仯閵? *
+ * 工作流任务类型.
  *
- * @author Codex
+ * @author chenming
  *
  * @since 2026/02/28
  */

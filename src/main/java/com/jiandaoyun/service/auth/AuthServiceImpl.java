@@ -3,9 +3,9 @@ package com.jiandaoyun.service.auth;
 import org.springframework.stereotype.Service;
 
 /**
- * 璁よ瘉鏈嶅姟瀹炵幇.
+ * 认证服务实现.
  *
- * @author Codex
+ * @author chenming
  *
  * @since 2026/02/28
  */

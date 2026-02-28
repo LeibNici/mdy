@@ -1,9 +1,9 @@
 package com.jiandaoyun.config;
 
 /**
- * RedisConfig 绫诲瀷瀹氫箟.
+ * Redis配置类.
  *
- * @author Codex
+ * @author chenming
  *
  * @since 2026/02/28
  */

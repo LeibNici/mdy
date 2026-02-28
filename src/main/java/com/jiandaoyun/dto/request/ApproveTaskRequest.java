@@ -5,9 +5,9 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 /**
- * 鐎光剝澹掓禒璇插鐠囬攱鐪伴妴? *
+ * 审批任务请求对象.
  *
- * @author Codex
+ * @author chenming
  *
  * @since 2026/02/28
  */

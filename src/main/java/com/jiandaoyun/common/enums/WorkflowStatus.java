@@ -1,19 +1,25 @@
 package com.jiandaoyun.common.enums;
 
 /**
- * 宸ヤ綔娴佺姸鎬佹灇涓?
+ * 工作流状态枚举定义.
  *
- * @author Codex
+ * @author chenming
  *
  * @since 2026/02/28
  */
 public enum WorkflowStatus {
-    /** 寰呭鐞? */
+    /**
+     * PENDING字段.
+     */
     PENDING,
 
-    /** 宸查€氳繃. */
+    /**
+     * APPROVED字段.
+     */
     APPROVED,
 
-    /** 宸查┏鍥? */
+    /**
+     * 字段说明.
+     */
     REJECTED
 }

@@ -1,9 +1,9 @@
 package com.jiandaoyun.service.data;
 
 /**
- * QueryService 绫诲瀷瀹氫箟.
+ * 查询服务接口.
  *
- * @author Codex
+ * @author chenming
  *
  * @since 2026/02/28
  */

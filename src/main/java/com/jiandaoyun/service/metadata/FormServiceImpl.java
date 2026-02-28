@@ -12,9 +12,9 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.springframework.stereotype.Service;
 
 /**
- * 鐞涖劌宕熼張宥呭閸愬懎鐡ㄧ€圭偟骞囬妴? *
+ * 表单服务实现.
  *
- * @author Codex
+ * @author chenming
  *
  * @since 2026/02/28
  */
@@ -25,7 +25,10 @@ public class FormServiceImpl implements FormService {
     private final ConcurrentHashMap<String, FormDefinition> formStore = new ConcurrentHashMap<>();
 
     /**
-     * {@inheritDoc}
+     * .
+     *
+     * @param request 请求参数.
+     * @return 处理结果.
      */
     @Override
     public FormDefinition create(CreateFormRequest request) {
@@ -56,9 +59,10 @@ public class FormServiceImpl implements FormService {
     }
 
     /**
-     * {@inheritDoc}
+     * 获取ByID.
      *
- * @throws BusinessException 鐞涖劌宕熸稉宥呯摠閸︺劍妞傞幎娑樺毉
+     * @param formId 表单标识.
+     * @return 处理结果.
      */
     @Override
     public FormDefinition getById(String formId) {
@@ -70,7 +74,9 @@ public class FormServiceImpl implements FormService {
     }
 
     /**
-     * {@inheritDoc}
+     * 查询.
+     *
+     * @return 结果列表.
      */
     @Override
     public List<FormDefinition> listAll() {

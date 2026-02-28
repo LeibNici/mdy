@@ -1,9 +1,9 @@
 package com.jiandaoyun.domain.tenant;
 
 /**
- * Tenant 绫诲瀷瀹氫箟.
+ * 租户类型.
  *
- * @author Codex
+ * @author chenming
  *
  * @since 2026/02/28
  */

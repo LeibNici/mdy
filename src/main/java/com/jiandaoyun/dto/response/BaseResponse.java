@@ -1,9 +1,9 @@
 package com.jiandaoyun.dto.response;
 
 /**
- * BaseResponse 绫诲瀷瀹氫箟.
+ * 基础响应对象.
  *
- * @author Codex
+ * @author chenming
  *
  * @since 2026/02/28
  */

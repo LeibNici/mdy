@@ -1,9 +1,9 @@
 package com.jiandaoyun.common.aspect;
 
 /**
- * PermissionAspect 绫诲瀷瀹氫箟.
+ * 权限切面.
  *
- * @author Codex
+ * @author chenming
  *
  * @since 2026/02/28
  */

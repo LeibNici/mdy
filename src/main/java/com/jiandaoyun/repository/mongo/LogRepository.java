@@ -1,9 +1,9 @@
 package com.jiandaoyun.repository.mongo;
 
 /**
- * LogRepository 绫诲瀷瀹氫箟.
+ * 日志仓储接口.
  *
- * @author Codex
+ * @author chenming
  *
  * @since 2026/02/28
  */

@@ -9,9 +9,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * 鐞涖劌宕熺€规矮绠熼懕姘値閺嶅箍鈧? *
+ * 表单定义类型.
  *
- * @author Codex
+ * @author chenming
  *
  * @since 2026/02/28
  */

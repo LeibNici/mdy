@@ -1,9 +1,9 @@
 package com.jiandaoyun.service.metadata;
 
 /**
- * ComponentService 绫诲瀷瀹氫箟.
+ * 组件服务接口.
  *
- * @author Codex
+ * @author chenming
  *
  * @since 2026/02/28
  */

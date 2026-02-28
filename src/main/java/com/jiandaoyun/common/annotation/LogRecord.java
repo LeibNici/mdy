@@ -6,9 +6,9 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * 鏃ュ織璁板綍娉ㄨВ.
+ * 日志记录接口定义.
  *
- * @author Codex
+ * @author chenming
  *
  * @since 2026/02/28
  */

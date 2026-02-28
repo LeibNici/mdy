@@ -1,9 +1,9 @@
 package com.jiandaoyun.domain.user;
 
 /**
- * UserSession 绫诲瀷瀹氫箟.
+ * 用户会话类型.
  *
- * @author Codex
+ * @author chenming
  *
  * @since 2026/02/28
  */

@@ -6,9 +6,9 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * 鏁版嵁鏉冮檺娉ㄨВ.
+ * 数据权限接口定义.
  *
- * @author Codex
+ * @author chenming
  *
  * @since 2026/02/28
  */

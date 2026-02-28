@@ -3,11 +3,11 @@ package com.jiandaoyun.common.model;
 import lombok.Data;
 
 /**
- * 统一的接口响应包装对象.
+ * 接口响应对象.
  *
- * @param <T> 业务数据类型
+ * @param <T> 响应数据类型.
  *
- * @author Codex
+ * @author chenming
  *
  * @since 2026/02/28
  */
@@ -25,11 +25,9 @@ public class ApiResponse<T> {
     /**
      * 构建成功响应.
      *
-     * @param data 业务数据
-     *
-     * @param <T> 业务数据类型
-     *
-     * @return 成功响应对象
+     * @param <T> 响应数据类型.
+     * @param data 响应数据.
+     * @return 统一响应结果.
      */
     public static <T> ApiResponse<T> ok(T data) {
         ApiResponse<T> response = new ApiResponse<>();
@@ -42,13 +40,10 @@ public class ApiResponse<T> {
     /**
      * 构建失败响应.
      *
-     * @param code 错误码
-     *
-     * @param message 错误信息
-     *
-     * @param <T> 业务数据类型
-     *
-     * @return 失败响应对象
+     * @param <T> 响应数据类型.
+     * @param code 业务状态码.
+     * @param message 响应消息.
+     * @return 统一响应结果.
      */
     public static <T> ApiResponse<T> fail(int code, String message) {
         ApiResponse<T> response = new ApiResponse<>();

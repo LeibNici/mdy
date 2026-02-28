@@ -1,9 +1,9 @@
 package com.jiandaoyun.core.metadata;
 
 /**
- * FieldTypeRegistry 绫诲瀷瀹氫箟.
+ * 字段类型注册中心.
  *
- * @author Codex
+ * @author chenming
  *
  * @since 2026/02/28
  */

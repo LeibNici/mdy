@@ -1,18 +1,18 @@
 package com.jiandaoyun.common.exception;
 
 /**
- * 涓氬姟寮傚父瀹氫箟.
+ * 业务异常类型.
  *
- * @author Codex
+ * @author chenming
  *
  * @since 2026/02/28
  */
 public class BusinessException extends RuntimeException {
 
     /**
-     * 鏋勯€犱笟鍔″紓甯?
+     * 构造业务异常实例.
      *
- * @param message 寮傚父淇℃伅
+     * @param message 异常消息.
      */
     public BusinessException(String message) {
         super(message);

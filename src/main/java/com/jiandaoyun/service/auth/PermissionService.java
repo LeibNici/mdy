@@ -1,9 +1,9 @@
 package com.jiandaoyun.service.auth;
 
 /**
- * PermissionService 绫诲瀷瀹氫箟.
+ * 权限服务接口.
  *
- * @author Codex
+ * @author chenming
  *
  * @since 2026/02/28
  */

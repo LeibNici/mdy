@@ -1,9 +1,9 @@
 package com.jiandaoyun.domain.metadata;
 
 /**
- * ComponentLib 绫诲瀷瀹氫箟.
+ * 组件Lib类型.
  *
- * @author Codex
+ * @author chenming
  *
  * @since 2026/02/28
  */

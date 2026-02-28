@@ -1,9 +1,9 @@
 package com.jiandaoyun.common.aspect;
 
 /**
- * TenantAspect 绫诲瀷瀹氫箟.
+ * 租户切面.
  *
- * @author Codex
+ * @author chenming
  *
  * @since 2026/02/28
  */

@@ -1,9 +1,9 @@
 package com.jiandaoyun.common.utils;
 
 /**
- * JsonUtil 绫诲瀷瀹氫箟.
+ * JSON工具类.
  *
- * @author Codex
+ * @author chenming
  *
  * @since 2026/02/28
  */

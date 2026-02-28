@@ -1,9 +1,9 @@
 package com.jiandaoyun.repository.redis;
 
 /**
- * RedisRepository 绫诲瀷瀹氫箟.
+ * Redis仓储接口.
  *
- * @author Codex
+ * @author chenming
  *
  * @since 2026/02/28
  */

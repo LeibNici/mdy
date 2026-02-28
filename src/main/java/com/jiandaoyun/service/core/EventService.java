@@ -1,9 +1,9 @@
 package com.jiandaoyun.service.core;
 
 /**
- * EventService 绫诲瀷瀹氫箟.
+ * 事件服务接口.
  *
- * @author Codex
+ * @author chenming
  *
  * @since 2026/02/28
  */

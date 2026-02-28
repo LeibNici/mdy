@@ -14,34 +14,32 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 閸斻劍鈧焦鏆熼幑顔藉付閸掕泛娅掗妴? *
+ * 数据控制器.
  *
- * @author Codex
+ * @author chenming
  *
  * @since 2026/02/28
  */
 @RestController
 @RequestMapping("/api/data")
-
 public class DataController {
 
     private final DataService dataService;
 
     /**
-     * 閺嬪嫰鈧姴鍤遍弫鑸偓?     *
- *
- * @param dataService 閺佺増宓侀張宥呭
+     * 构造数据控制器实例.
+     *
+     * @param dataService 数据服务实例.
      */
     public DataController(DataService dataService) {
         this.dataService = dataService;
     }
 
     /**
-     * 閹绘劒姘︽稉鈧弶陇銆冮崡鏇熸殶閹诡喓鈧?     *
- *
- * @param request 閹绘劒姘︾拠閿嬬湴
- *
- * @return 娣囨繂鐡ㄩ崥搴ｆ畱鐠佹澘缍?
+     * 提交表单数据.
+     *
+     * @param request 数据提交请求.
+     * @return 提交后的记录数据.
      */
     @PostMapping("/submit")
     public ApiResponse<Map<String, Object>> submit(@Valid @RequestBody SubmitDataRequest request) {
@@ -49,11 +47,10 @@ public class DataController {
     }
 
     /**
-     * 閹稿銆冮崡?ID 閺屻儴顕楅弫鐗堝祦閸掓銆冮妴?     *
- *
- * @param formId 鐞涖劌宕?ID
- *
- * @return 鐠佹澘缍嶉崚妤勩€?
+     * 按表单标识查询数据列表.
+     *
+     * @param formId 表单标识.
+     * @return 表单数据列表.
      */
     @GetMapping("/{formId}")
     public ApiResponse<List<Map<String, Object>>> listByFormId(@PathVariable String formId) {

@@ -1,9 +1,9 @@
 package com.jiandaoyun.common.utils;
 
 /**
- * DateUtil 绫诲瀷瀹氫箟.
+ * 日期工具类.
  *
- * @author Codex
+ * @author chenming
  *
  * @since 2026/02/28
  */

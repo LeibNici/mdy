@@ -14,9 +14,9 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.springframework.stereotype.Service;
 
 /**
- * 动态数据服务内存实现.
+ * 数据服务实现.
  *
- * @author Codex
+ * @author chenming
  *
  * @since 2026/02/28
  */
@@ -30,11 +30,10 @@ public class DataServiceImpl implements DataService {
     private final ConcurrentHashMap<String, List<Map<String, Object>>> records = new ConcurrentHashMap<>();
 
     /**
-     * 构造函数.
+     * 构造数据服务实例.
      *
-     * @param formService 表单服务
-     *
-     * @param validatorService 校验服务
+     * @param formService 表单服务实例.
+     * @param validatorService 校验服务实例.
      */
     public DataServiceImpl(FormService formService, ValidatorService validatorService) {
         this.formService = formService;
@@ -42,7 +41,10 @@ public class DataServiceImpl implements DataService {
     }
 
     /**
-     * {@inheritDoc}
+     * 提交一条表单数据.
+     *
+     * @param request 数据提交请求.
+     * @return 持久化后的记录数据.
      */
     @Override
     public Map<String, Object> submit(SubmitDataRequest request) {
@@ -59,7 +61,10 @@ public class DataServiceImpl implements DataService {
     }
 
     /**
-     * {@inheritDoc}
+     * 根据表单标识查询数据列表.
+     *
+     * @param formId 表单标识.
+     * @return 表单数据列表.
      */
     @Override
     public List<Map<String, Object>> listByFormId(String formId) {

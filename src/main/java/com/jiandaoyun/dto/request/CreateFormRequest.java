@@ -9,9 +9,9 @@ import java.util.List;
 import lombok.Data;
 
 /**
- * 閸掓稑缂撶悰銊ュ礋鐎规矮绠熺拠閿嬬湴閵? *
+ * 创建表单请求对象.
  *
- * @author Codex
+ * @author chenming
  *
  * @since 2026/02/28
  */
@@ -31,11 +31,11 @@ public class CreateFormRequest {
     private List<FieldRequest> fields;
 
     /**
-     * 閸掓稑缂撶€涙顔岀€规矮绠熺拠閿嬬湴閵?     *
- *
- * @author Codex
- *
- * @since 2026/02/28
+     * 字段请求对象.
+     *
+     * @author chenming
+     *
+     * @since 2026/02/28
      */
     @Data
 

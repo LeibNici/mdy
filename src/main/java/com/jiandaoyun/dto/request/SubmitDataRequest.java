@@ -6,9 +6,9 @@ import java.util.Map;
 import lombok.Data;
 
 /**
- * 閹绘劒姘︾悰銊ュ礋閺佺増宓佺拠閿嬬湴閵? *
+ * 提交数据请求对象.
  *
- * @author Codex
+ * @author chenming
  *
  * @since 2026/02/28
  */

@@ -1,9 +1,9 @@
 package com.jiandaoyun.domain.file;
 
 /**
- * FileRecord 绫诲瀷瀹氫箟.
+ * 文件记录类型.
  *
- * @author Codex
+ * @author chenming
  *
  * @since 2026/02/28
  */

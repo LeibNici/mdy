@@ -1,9 +1,9 @@
 package com.jiandaoyun.config;
 
 /**
- * AsyncConfig 绫诲瀷瀹氫箟.
+ * 异步配置类.
  *
- * @author Codex
+ * @author chenming
  *
  * @since 2026/02/28
  */

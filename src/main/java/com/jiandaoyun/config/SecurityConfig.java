@@ -7,9 +7,9 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 
 /**
- * 安全配置.
+ * 安全配置类.
  *
- * @author Codex
+ * @author chenming
  *
  * @since 2026/02/28
  */
@@ -17,13 +17,11 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     /**
-     * 构建安全过滤链.
+     * 执行安全FilterChain操作.
      *
-     * @param http Spring Security HTTP 配置对象
-     *
-     * @return 安全过滤链
-     *
-     * @throws Exception 安全配置失败时抛出
+     * @param http .
+     * @return 处理结果.
+     * @throws Exception Exception 异常信息.
      */
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {

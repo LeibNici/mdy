@@ -6,9 +6,9 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * 绉熸埛鏍￠獙娉ㄨВ.
+ * 租户校验接口定义.
  *
- * @author Codex
+ * @author chenming
  *
  * @since 2026/02/28
  */

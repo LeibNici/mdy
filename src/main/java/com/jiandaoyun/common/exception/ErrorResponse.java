@@ -4,9 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 /**
- * 寮傚父鍝嶅簲浣?
+ * 错误响应对象.
  *
- * @author Codex
+ * @author chenming
  *
  * @since 2026/02/28
  */

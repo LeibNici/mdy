@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * 缁犫偓闁挷绨張宥呭閸氼垰濮╅崗銉ュ經閵? *
+ * 应用类型.
  *
- * @author Codex
+ * @author chenming
  *
  * @since 2026/02/28
  */
@@ -15,9 +15,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class Application {
 
     /**
-     * 閸氼垰濮?Spring Boot 鎼存梻鏁ら妴?     *
- *
- * @param args 閸氼垰濮╅崣鍌涙殶
+     * 执行main操作.
+     *
+     * @param args .
      */
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);

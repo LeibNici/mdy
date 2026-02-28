@@ -4,9 +4,9 @@ import lombok.Builder;
 import lombok.Data;
 
 /**
- * 鐞涖劌宕熷Ч鍥ㄢ偓缁樺Г鐞涖劌鎼锋惔鏂烩偓? *
+ * 报表汇总响应对象.
  *
- * @author Codex
+ * @author chenming
  *
  * @since 2026/02/28
  */

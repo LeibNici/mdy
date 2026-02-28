@@ -6,9 +6,9 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
- * Web MVC 配置.
+ * Web配置类.
  *
- * @author Codex
+ * @author chenming
  *
  * @since 2026/02/28
  */
@@ -19,9 +19,9 @@ public class WebConfig implements WebMvcConfigurer {
     private String[] allowedOrigins;
 
     /**
-     * 配置跨域规则.
+     * 执行addCorsMappings操作.
      *
-     * @param registry CORS 注册器
+     * @param registry .
      */
     @Override
     public void addCorsMappings(CorsRegistry registry) {

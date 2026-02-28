@@ -4,11 +4,11 @@ import java.util.List;
 import lombok.Data;
 
 /**
- * 鍒嗛〉鍝嶅簲瀵硅薄.
+ * 分页结果对象.
  *
- * @param <T> 璁板綍绫诲瀷
+ * @param <T> 分页记录类型.
  *
- * @author Codex
+ * @author chenming
  *
  * @since 2026/02/28
  */
