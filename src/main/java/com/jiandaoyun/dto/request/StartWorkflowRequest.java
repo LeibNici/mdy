@@ -4,7 +4,10 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 /**
- * Request payload for starting a workflow instance.
+ * 启动流程请求。
+ *
+ * @author Codex
+ * @since 0.1.0
  */
 @Data
 public class StartWorkflowRequest {

@@ -7,17 +7,21 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 
 /**
- * Security configuration for local development and API testing.
+ * 安全配置。
+ * 当前脚手架阶段默认放行所有请求，便于联调与测试。
+ *
+ * @author Codex
+ * @since 0.1.0
  */
 @Configuration
 public class SecurityConfig {
 
     /**
-     * Configures a permissive security chain for current scaffold.
+     * 构建安全过滤链。
      *
-     * @param http security builder
-     * @return built security filter chain
-     * @throws Exception when security configuration fails
+     * @param http Spring Security HTTP 配置对象
+     * @return 安全过滤链
+     * @throws Exception 安全配置失败时抛出
      */
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {

@@ -12,7 +12,10 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.springframework.stereotype.Service;
 
 /**
- * In-memory implementation of {@link FormService}.
+ * 表单服务内存实现。
+ *
+ * @author Codex
+ * @since 0.1.0
  */
 @Service
 public class FormServiceImpl implements FormService {
@@ -53,7 +56,7 @@ public class FormServiceImpl implements FormService {
     /**
      * {@inheritDoc}
      *
-     * @throws BusinessException when form does not exist
+     * @throws BusinessException 表单不存在时抛出
      */
     @Override
     public FormDefinition getById(String formId) {

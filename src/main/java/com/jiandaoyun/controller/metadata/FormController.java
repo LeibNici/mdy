@@ -14,7 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * REST controller for form metadata management.
+ * 表单元数据控制器。
+ *
+ * @author Codex
+ * @since 0.1.0
  */
 @RestController
 @RequestMapping("/api/forms")
@@ -23,19 +26,19 @@ public class FormController {
     private final FormService formService;
 
     /**
-     * Creates controller instance.
+     * 构造函数。
      *
-     * @param formService form service
+     * @param formService 表单服务
      */
     public FormController(FormService formService) {
         this.formService = formService;
     }
 
     /**
-     * Creates a new form.
+     * 创建表单定义。
      *
-     * @param request create form request
-     * @return created form
+     * @param request 创建请求
+     * @return 创建后的表单定义
      */
     @PostMapping
     public ApiResponse<FormDefinition> create(@Valid @RequestBody CreateFormRequest request) {
@@ -43,10 +46,10 @@ public class FormController {
     }
 
     /**
-     * Gets form detail by ID.
+     * 按 ID 获取表单定义。
      *
-     * @param formId form ID
-     * @return form detail
+     * @param formId 表单 ID
+     * @return 表单定义
      */
     @GetMapping("/{formId}")
     public ApiResponse<FormDefinition> getById(@PathVariable String formId) {
@@ -54,9 +57,9 @@ public class FormController {
     }
 
     /**
-     * Lists all forms.
+     * 查询全部表单定义。
      *
-     * @return all forms
+     * @return 表单定义列表
      */
     @GetMapping
     public ApiResponse<List<FormDefinition>> listAll() {

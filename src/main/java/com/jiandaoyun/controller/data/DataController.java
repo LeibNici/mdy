@@ -14,7 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * REST controller for form data operations.
+ * 动态数据控制器。
+ *
+ * @author Codex
+ * @since 0.1.0
  */
 @RestController
 @RequestMapping("/api/data")
@@ -23,19 +26,19 @@ public class DataController {
     private final DataService dataService;
 
     /**
-     * Creates controller instance.
+     * 构造函数。
      *
-     * @param dataService data service
+     * @param dataService 数据服务
      */
     public DataController(DataService dataService) {
         this.dataService = dataService;
     }
 
     /**
-     * Submits one form data record.
+     * 提交一条表单数据。
      *
-     * @param request submit request
-     * @return submitted record
+     * @param request 提交请求
+     * @return 保存后的记录
      */
     @PostMapping("/submit")
     public ApiResponse<Map<String, Object>> submit(@Valid @RequestBody SubmitDataRequest request) {
@@ -43,10 +46,10 @@ public class DataController {
     }
 
     /**
-     * Lists records by form ID.
+     * 按表单 ID 查询数据列表。
      *
-     * @param formId form ID
-     * @return record list
+     * @param formId 表单 ID
+     * @return 记录列表
      */
     @GetMapping("/{formId}")
     public ApiResponse<List<Map<String, Object>>> listByFormId(@PathVariable String formId) {

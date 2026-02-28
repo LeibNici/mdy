@@ -5,7 +5,10 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 /**
- * Request payload for approving or rejecting a workflow task.
+ * 审批任务请求。
+ *
+ * @author Codex
+ * @since 0.1.0
  */
 @Data
 public class ApproveTaskRequest {

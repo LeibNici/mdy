@@ -14,7 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * REST controller for workflow actions.
+ * 工作流控制器。
+ *
+ * @author Codex
+ * @since 0.1.0
  */
 @RestController
 @RequestMapping("/api/workflow")
@@ -23,19 +26,19 @@ public class WorkflowController {
     private final WorkflowService workflowService;
 
     /**
-     * Creates controller instance.
+     * 构造函数。
      *
-     * @param workflowService workflow service
+     * @param workflowService 工作流服务
      */
     public WorkflowController(WorkflowService workflowService) {
         this.workflowService = workflowService;
     }
 
     /**
-     * Starts one workflow instance.
+     * 启动流程实例。
      *
-     * @param request start request
-     * @return created workflow instance
+     * @param request 启动请求
+     * @return 创建后的流程实例
      */
     @PostMapping("/start")
     public ApiResponse<WorkflowInstance> start(@Valid @RequestBody StartWorkflowRequest request) {
@@ -43,10 +46,10 @@ public class WorkflowController {
     }
 
     /**
-     * Approves or rejects workflow task.
+     * 审批当前流程任务。
      *
-     * @param request approve request
-     * @return updated workflow instance
+     * @param request 审批请求
+     * @return 更新后的流程实例
      */
     @PostMapping("/approve")
     public ApiResponse<WorkflowInstance> approve(@Valid @RequestBody ApproveTaskRequest request) {
@@ -54,10 +57,10 @@ public class WorkflowController {
     }
 
     /**
-     * Gets workflow instance by ID.
+     * 按实例 ID 查询流程。
      *
-     * @param instanceId instance ID
-     * @return workflow instance
+     * @param instanceId 流程实例 ID
+     * @return 流程实例
      */
     @GetMapping("/{instanceId}")
     public ApiResponse<WorkflowInstance> getById(@PathVariable String instanceId) {

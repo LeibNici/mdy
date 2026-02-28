@@ -14,7 +14,10 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.springframework.stereotype.Service;
 
 /**
- * In-memory implementation of {@link DataService}.
+ * 动态数据服务内存实现。
+ *
+ * @author Codex
+ * @since 0.1.0
  */
 @Service
 public class DataServiceImpl implements DataService {
@@ -24,10 +27,10 @@ public class DataServiceImpl implements DataService {
     private final ConcurrentHashMap<String, List<Map<String, Object>>> records = new ConcurrentHashMap<>();
 
     /**
-     * Creates service instance.
+     * 构造函数。
      *
-     * @param formService form metadata service
-     * @param validatorService data validator service
+     * @param formService 表单服务
+     * @param validatorService 校验服务
      */
     public DataServiceImpl(FormService formService, ValidatorService validatorService) {
         this.formService = formService;

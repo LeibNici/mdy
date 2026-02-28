@@ -3,7 +3,10 @@ package com.jiandaoyun.common.utils;
 import java.util.UUID;
 
 /**
- * Generates globally unique IDs for in-memory entities.
+ * 生成全局唯一标识符。
+ *
+ * @author Codex
+ * @since 0.1.0
  */
 public final class IdGenerator {
 
@@ -11,9 +14,9 @@ public final class IdGenerator {
     }
 
     /**
-     * Generates an ID without dash characters.
+     * 生成不包含横杠的随机 ID。
      *
-     * @return generated unique ID
+     * @return 唯一 ID
      */
     public static String nextId() {
         return UUID.randomUUID().toString().replace("-", "");

@@ -3,9 +3,11 @@ package com.jiandaoyun.common.model;
 import lombok.Data;
 
 /**
- * Unified REST response envelope.
+ * 统一的接口响应包装对象。
  *
- * @param <T> payload type
+ * @param <T> 业务数据类型
+ * @author Codex
+ * @since 0.1.0
  */
 @Data
 public class ApiResponse<T> {
@@ -15,11 +17,11 @@ public class ApiResponse<T> {
     private long timestamp = System.currentTimeMillis();
 
     /**
-     * Creates a successful response.
+     * 构建成功响应。
      *
-     * @param data business payload
-     * @param <T> payload type
-     * @return success response with default code 200
+     * @param data 业务数据
+     * @param <T> 业务数据类型
+     * @return 成功响应对象
      */
     public static <T> ApiResponse<T> ok(T data) {
         ApiResponse<T> response = new ApiResponse<>();
@@ -30,12 +32,12 @@ public class ApiResponse<T> {
     }
 
     /**
-     * Creates a failed response.
+     * 构建失败响应。
      *
-     * @param code business error code
-     * @param message error message
-     * @param <T> payload type
-     * @return error response
+     * @param code 错误码
+     * @param message 错误信息
+     * @param <T> 业务数据类型
+     * @return 失败响应对象
      */
     public static <T> ApiResponse<T> fail(int code, String message) {
         ApiResponse<T> response = new ApiResponse<>();

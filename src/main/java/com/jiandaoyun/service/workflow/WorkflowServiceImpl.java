@@ -11,7 +11,10 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.springframework.stereotype.Service;
 
 /**
- * In-memory implementation of {@link WorkflowService}.
+ * 工作流服务内存实现。
+ *
+ * @author Codex
+ * @since 0.1.0
  */
 @Service
 public class WorkflowServiceImpl implements WorkflowService {
@@ -41,7 +44,7 @@ public class WorkflowServiceImpl implements WorkflowService {
     /**
      * {@inheritDoc}
      *
-     * @throws BusinessException when task ID mismatch occurs
+     * @throws BusinessException 任务 ID 不匹配时抛出
      */
     @Override
     public WorkflowInstance approve(ApproveTaskRequest request) {
@@ -57,7 +60,7 @@ public class WorkflowServiceImpl implements WorkflowService {
     /**
      * {@inheritDoc}
      *
-     * @throws BusinessException when instance does not exist
+     * @throws BusinessException 流程实例不存在时抛出
      */
     @Override
     public WorkflowInstance getById(String instanceId) {

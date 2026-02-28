@@ -9,7 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * REST controller for report queries.
+ * 报表查询控制器。
+ *
+ * @author Codex
+ * @since 0.1.0
  */
 @RestController
 @RequestMapping("/api/reports")
@@ -18,19 +21,19 @@ public class ReportController {
     private final ReportService reportService;
 
     /**
-     * Creates controller instance.
+     * 构造函数。
      *
-     * @param reportService report service
+     * @param reportService 报表服务
      */
     public ReportController(ReportService reportService) {
         this.reportService = reportService;
     }
 
     /**
-     * Gets summary report for one form.
+     * 按表单获取汇总报表。
      *
-     * @param formId form ID
-     * @return summary result
+     * @param formId 表单 ID
+     * @return 汇总结果
      */
     @GetMapping("/forms/{formId}/summary")
     public ApiResponse<ReportSummaryResponse> getFormSummary(@PathVariable String formId) {

@@ -8,7 +8,10 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 
 /**
- * Default field-level validator implementation.
+ * 默认字段校验实现。
+ *
+ * @author Codex
+ * @since 0.1.0
  */
 @Service
 public class ValidatorServiceImpl implements ValidatorService {
@@ -16,7 +19,7 @@ public class ValidatorServiceImpl implements ValidatorService {
     /**
      * {@inheritDoc}
      *
-     * @throws BusinessException when required field is missing or type mismatch occurs
+     * @throws BusinessException 必填项缺失或类型不匹配时抛出
      */
     @Override
     public void validateSubmission(FormDefinition formDefinition, Map<String, Object> data) {
@@ -32,11 +35,11 @@ public class ValidatorServiceImpl implements ValidatorService {
     }
 
     /**
-     * Validates field value type.
+     * 校验字段值类型。
      *
-     * @param fieldType expected type
-     * @param key field key
-     * @param value field value
+     * @param fieldType 预期类型
+     * @param key 字段键
+     * @param value 字段值
      */
     private void validateType(FieldType fieldType, String key, Object value) {
         boolean valid = switch (fieldType) {

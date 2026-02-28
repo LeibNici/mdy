@@ -5,31 +5,34 @@ import com.jiandaoyun.dto.request.ApproveTaskRequest;
 import com.jiandaoyun.dto.request.StartWorkflowRequest;
 
 /**
- * Workflow orchestration service.
+ * 工作流编排服务接口。
+ *
+ * @author Codex
+ * @since 0.1.0
  */
 public interface WorkflowService {
 
     /**
-     * Starts a workflow instance for one record.
+     * 启动流程实例。
      *
-     * @param request start request
-     * @return created workflow instance
+     * @param request 启动请求
+     * @return 流程实例
      */
     WorkflowInstance start(StartWorkflowRequest request);
 
     /**
-     * Approves or rejects current task.
+     * 审批或驳回流程任务。
      *
-     * @param request approve request
-     * @return updated workflow instance
+     * @param request 审批请求
+     * @return 更新后的流程实例
      */
     WorkflowInstance approve(ApproveTaskRequest request);
 
     /**
-     * Gets workflow instance by ID.
+     * 按 ID 查询流程实例。
      *
-     * @param instanceId workflow instance ID
-     * @return workflow instance
+     * @param instanceId 流程实例 ID
+     * @return 流程实例
      */
     WorkflowInstance getById(String instanceId);
 }

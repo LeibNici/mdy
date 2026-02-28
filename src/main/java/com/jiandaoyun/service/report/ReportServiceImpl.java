@@ -5,7 +5,10 @@ import com.jiandaoyun.service.data.DataService;
 import org.springframework.stereotype.Service;
 
 /**
- * Default implementation of {@link ReportService}.
+ * 报表服务默认实现。
+ *
+ * @author Codex
+ * @since 0.1.0
  */
 @Service
 public class ReportServiceImpl implements ReportService {
@@ -13,9 +16,9 @@ public class ReportServiceImpl implements ReportService {
     private final DataService dataService;
 
     /**
-     * Creates report service instance.
+     * 构造函数。
      *
-     * @param dataService data service
+     * @param dataService 数据服务
      */
     public ReportServiceImpl(DataService dataService) {
         this.dataService = dataService;

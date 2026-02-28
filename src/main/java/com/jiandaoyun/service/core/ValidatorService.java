@@ -4,15 +4,18 @@ import com.jiandaoyun.domain.metadata.FormDefinition;
 import java.util.Map;
 
 /**
- * Validates submitted form data against form metadata.
+ * 数据校验服务接口。
+ *
+ * @author Codex
+ * @since 0.1.0
  */
 public interface ValidatorService {
 
     /**
-     * Validates submission payload.
+     * 按表单定义校验提交数据。
      *
-     * @param formDefinition target form definition
-     * @param data submitted key-value data
+     * @param formDefinition 表单定义
+     * @param data 提交数据
      */
     void validateSubmission(FormDefinition formDefinition, Map<String, Object> data);
 }

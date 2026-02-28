@@ -5,23 +5,26 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Dynamic data service for form records.
+ * 动态数据服务接口。
+ *
+ * @author Codex
+ * @since 0.1.0
  */
 public interface DataService {
 
     /**
-     * Submits one record to target form.
+     * 提交一条记录。
      *
-     * @param request submit request
-     * @return created record
+     * @param request 提交请求
+     * @return 保存后的记录
      */
     Map<String, Object> submit(SubmitDataRequest request);
 
     /**
-     * Lists all records under one form.
+     * 按表单 ID 查询记录。
      *
-     * @param formId form ID
-     * @return records list
+     * @param formId 表单 ID
+     * @return 记录列表
      */
     List<Map<String, Object>> listByFormId(String formId);
 }

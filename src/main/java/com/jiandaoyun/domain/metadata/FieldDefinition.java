@@ -7,7 +7,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * Field metadata definition inside a form.
+ * 表单字段元数据定义。
+ *
+ * @author Codex
+ * @since 0.1.0
  */
 @Data
 @Builder

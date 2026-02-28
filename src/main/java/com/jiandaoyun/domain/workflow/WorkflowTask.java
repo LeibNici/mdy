@@ -7,7 +7,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * Task node in a workflow instance.
+ * 流程实例中的任务节点。
+ *
+ * @author Codex
+ * @since 0.1.0
  */
 @Data
 @Builder

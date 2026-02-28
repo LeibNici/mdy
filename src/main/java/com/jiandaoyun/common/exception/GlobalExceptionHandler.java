@@ -10,16 +10,19 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 /**
- * Global exception to REST response mapper.
+ * 全局异常处理器，将异常统一转换为 API 响应。
+ *
+ * @author Codex
+ * @since 0.1.0
  */
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
     /**
-     * Handles business exceptions.
+     * 处理业务异常。
      *
-     * @param ex business exception
-     * @return response entity with bad request status
+     * @param ex 业务异常
+     * @return 400 响应
      */
     @ExceptionHandler(BusinessException.class)
     public ResponseEntity<ApiResponse<Void>> handleBusiness(BusinessException ex) {
@@ -28,10 +31,10 @@ public class GlobalExceptionHandler {
     }
 
     /**
-     * Handles bean validation exceptions.
+     * 处理参数校验异常。
      *
-     * @param ex validation exception
-     * @return response entity with bad request status
+     * @param ex 参数校验异常
+     * @return 400 响应
      */
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ApiResponse<Void>> handleValid(MethodArgumentNotValidException ex) {
@@ -43,10 +46,10 @@ public class GlobalExceptionHandler {
     }
 
     /**
-     * Handles other uncaught exceptions.
+     * 处理未捕获异常。
      *
-     * @param ex unknown exception
-     * @return response entity with internal server error status
+     * @param ex 未知异常
+     * @return 500 响应
      */
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiResponse<Void>> handleOther(Exception ex) {

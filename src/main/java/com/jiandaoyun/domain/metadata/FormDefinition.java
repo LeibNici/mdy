@@ -9,7 +9,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * Form metadata aggregate root.
+ * 表单定义聚合根。
+ *
+ * @author Codex
+ * @since 0.1.0
  */
 @Data
 @Builder

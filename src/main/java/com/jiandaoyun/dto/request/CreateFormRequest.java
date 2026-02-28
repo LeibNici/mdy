@@ -9,7 +9,10 @@ import java.util.List;
 import lombok.Data;
 
 /**
- * Request payload for creating a form definition.
+ * 创建表单定义请求。
+ *
+ * @author Codex
+ * @since 0.1.0
  */
 @Data
 public class CreateFormRequest {
@@ -24,7 +27,10 @@ public class CreateFormRequest {
     private List<FieldRequest> fields;
 
     /**
-     * Request payload for creating one field in a form.
+     * 创建字段定义请求。
+     *
+     * @author Codex
+     * @since 0.1.0
      */
     @Data
     public static class FieldRequest {

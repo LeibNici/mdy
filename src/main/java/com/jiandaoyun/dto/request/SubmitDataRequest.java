@@ -6,7 +6,10 @@ import java.util.Map;
 import lombok.Data;
 
 /**
- * Request payload for submitting one form record.
+ * 提交表单数据请求。
+ *
+ * @author Codex
+ * @since 0.1.0
  */
 @Data
 public class SubmitDataRequest {

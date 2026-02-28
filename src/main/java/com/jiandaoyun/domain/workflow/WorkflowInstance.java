@@ -8,7 +8,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * Runtime workflow instance for one data record.
+ * 单条业务数据对应的流程实例。
+ *
+ * @author Codex
+ * @since 0.1.0
  */
 @Data
 @Builder
