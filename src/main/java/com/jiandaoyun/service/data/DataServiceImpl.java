@@ -1,6 +1,7 @@
 package com.jiandaoyun.service.data;
 
 import com.jiandaoyun.common.utils.IdGenerator;
+import com.jiandaoyun.core.engine.FormEngine;
 import com.jiandaoyun.domain.metadata.FormDefinition;
 import com.jiandaoyun.dto.request.SubmitDataRequest;
 import com.jiandaoyun.service.core.ValidatorService;
@@ -25,6 +26,8 @@ public class DataServiceImpl implements DataService {
 
     private final FormService formService;
 
+    private final FormEngine formEngine;
+
     private final ValidatorService validatorService;
 
     private final ConcurrentHashMap<String, List<Map<String, Object>>> records = new ConcurrentHashMap<>();
@@ -33,10 +36,12 @@ public class DataServiceImpl implements DataService {
      * 构造数据服务实例.
      *
      * @param formService 表单服务实例.
+     * @param formEngine 表单引擎实例.
      * @param validatorService 校验服务实例.
      */
-    public DataServiceImpl(FormService formService, ValidatorService validatorService) {
+    public DataServiceImpl(FormService formService, FormEngine formEngine, ValidatorService validatorService) {
         this.formService = formService;
+        this.formEngine = formEngine;
         this.validatorService = validatorService;
     }
 
@@ -49,9 +54,10 @@ public class DataServiceImpl implements DataService {
     @Override
     public Map<String, Object> submit(SubmitDataRequest request) {
         FormDefinition form = formService.getById(request.getFormId());
-        validatorService.validateSubmission(form, request.getData());
+        Map<String, Object> normalizedData = formEngine.normalizeSubmission(form, request.getData());
+        validatorService.validateSubmission(form, normalizedData);
 
-        Map<String, Object> record = new HashMap<>(request.getData());
+        Map<String, Object> record = new HashMap<>(normalizedData);
         record.put("id", IdGenerator.nextId());
         record.put("formId", request.getFormId());
         record.put("createdAt", Instant.now().toString());

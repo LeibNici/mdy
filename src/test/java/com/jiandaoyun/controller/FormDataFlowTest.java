@@ -110,4 +110,39 @@ class FormDataFlowTest {
             .andExpect(status().isBadRequest())
             .andExpect(jsonPath("$.code").value(400));
     }
+
+    @Test
+    void shouldRejectUnknownField() throws Exception {
+        String createFormBody = """
+            {
+              "name": "contract_form",
+              "fields": [
+                {"key":"title","label":"title","type":"TEXT","required":true}
+              ]
+            }
+            """;
+
+        MvcResult formResult = mockMvc.perform(post("/api/forms")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(createFormBody))
+            .andExpect(status().isOk())
+            .andReturn();
+
+        String formId = objectMapper.readTree(formResult.getResponse().getContentAsString())
+            .path("data").path("id").asText();
+
+        String invalidBody = """
+            {
+              "formId": "%s",
+              "data": {"title":"agreement", "extra":"invalid"}
+            }
+            """.formatted(formId);
+
+        mockMvc.perform(post("/api/data/submit")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(invalidBody))
+            .andExpect(status().isBadRequest())
+            .andExpect(jsonPath("$.code").value(400))
+            .andExpect(jsonPath("$.message").value("unknown field: extra"));
+    }
 }
