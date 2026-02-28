@@ -6,17 +6,21 @@ import java.util.Map;
 import lombok.Data;
 
 /**
- * 提交表单数据请求。
+ * 閹绘劒姘︾悰銊ュ礋閺佺増宓佺拠閿嬬湴閵? *
  *
  * @author Codex
- * @since 0.1.0
+ *
+ * @since 2026/02/28
  */
 @Data
+
 public class SubmitDataRequest {
 
     @NotBlank(message = "formId cannot be blank")
+
     private String formId;
 
     @NotNull(message = "data cannot be null")
+
     private Map<String, Object> data;
 }

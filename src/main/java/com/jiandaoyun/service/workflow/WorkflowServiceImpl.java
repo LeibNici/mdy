@@ -11,12 +11,14 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.springframework.stereotype.Service;
 
 /**
- * 工作流服务内存实现。
+ * 瀹搞儰缍斿ù浣规箛閸斺€冲敶鐎涙ê鐤勯悳鑸偓? *
  *
  * @author Codex
- * @since 0.1.0
+ *
+ * @since 2026/02/28
  */
 @Service
+
 public class WorkflowServiceImpl implements WorkflowService {
 
     private final ConcurrentHashMap<String, WorkflowInstance> instanceStore = new ConcurrentHashMap<>();
@@ -44,7 +46,7 @@ public class WorkflowServiceImpl implements WorkflowService {
     /**
      * {@inheritDoc}
      *
-     * @throws BusinessException 任务 ID 不匹配时抛出
+ * @throws BusinessException 娴犺濮?ID 娑撳秴灏柊宥嗘閹舵稑鍤?
      */
     @Override
     public WorkflowInstance approve(ApproveTaskRequest request) {
@@ -60,7 +62,7 @@ public class WorkflowServiceImpl implements WorkflowService {
     /**
      * {@inheritDoc}
      *
-     * @throws BusinessException 流程实例不存在时抛出
+ * @throws BusinessException 濞翠胶鈻肩€圭偘绶ユ稉宥呯摠閸︺劍妞傞幎娑樺毉
      */
     @Override
     public WorkflowInstance getById(String instanceId) {

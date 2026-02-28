@@ -1,0 +1,429 @@
+<?xml version="1.0"?>
+<!DOCTYPE module PUBLIC "-//Checkstyle//DTD Checkstyle Configuration 1.3//EN"
+        "https://checkstyle.org/dtds/configuration_1_3.dtd">
+<module name="Checker">
+
+    <property name="charset" value="UTF-8"/>
+    <!-- 设置CheckStyle的提示级别为警告 -->
+    <!--调试的改成warning，发布的时候是error-->
+    <!--<property name="severity" value="warning"/>-->
+    <property name="severity" value="error"/>
+    <property name="fileExtensions" value="java, properties, xml"/>
+
+    <module name="LineLength">
+        <property name="fileExtensions" value="java"/>
+        <property name="max" value="150"/>
+        <property name="ignorePattern" value="^implements.*|^extends.*|^package.*|^import.*|a href|href|http://|https://|ftp://"/>
+    </module>
+
+    <!-- TreeWalker Checks -->
+    <module name="TreeWalker">
+        <!--  系统内置checks -->
+        <!-- Annotations -->
+        <!--
+			AnnotationLocation
+			    AnnotationOnSameLine(不用)
+			AnnotationUseStyle
+			MissingDeprecated
+			    MissingOverride(不用)：建议只在java5中使用，不用
+			PackageAnnotation
+			SuppressWarnings
+			SuppressWarningsHolder
+		-->
+
+        <!-- Block Checks -->
+        <!--
+                AvoidNestedBlocks:多余的括号，避免无效的括号嵌套
+                EmptyBlock:空代码块
+                EmptyCatchBlock:空的catch变量必须是expected或者ignore
+                LeftCurly:检查{和左边的代码是否在同行
+                RightCurly:检查右花括号}的代码块位置
+                NeedBraces:检查是否应该使用括号的地方没有加括号
+        -->
+        <module name="AvoidNestedBlocks"/>
+        <module name="EmptyBlock">
+            <!-- 可以没代码，但是必须要有点什么，例如注释 -->
+            <property name="option" value="text"/>
+        </module>
+        <module name="EmptyCatchBlock">
+            <property name="exceptionVariableName" value="expected|ignore"/>
+        </module>
+        <module name="LeftCurly"/>
+        <module name="RightCurly"/>
+        <module name="NeedBraces"/>
+
+        <!-- Class Design -->
+        <!--
+            DesignForExtension
+                FinalClass:只有私有构造器的类必须声明为final
+            HideUtilityClassConstructor
+                InnerTypeLast:检查内部类的位置。属性和方法声明应位于内部类之前
+                InterfaceIsType:接口类型检查，不能只有常量定义
+                MutableException
+                OneTopLevelClass：检查顶级类的接口或枚举是否位于自己的源文件中
+                ThrowsCount(不用)：将抛出语句限制为指定的计数
+                VisibilityModifier(不用)：检查class成员属性可见性
+        -->
+        <module name="FinalClass"/>
+        <module name="InterfaceIsType"/>
+        <!--？确保异常是不可变的-->
+        <module name="MutableException"/>
+        <module name="InnerTypeLast"/>
+        <module name="OneTopLevelClass"/>
+
+        <!-- Coding -->
+        <!--
+            ArrayTrailingComma
+            AvoidDoubleBraceInitialization
+            AvoidInlineConditionals
+            AvoidNoArgumentSuperConstructorCall
+            CovariantEquals
+            DeclarationOrder
+            DefaultComesLast
+                EmptyStatement:检测空语句(独立的“;”分号)。空语句通常会引入难以发现的错误
+            EqualsAvoidNull
+            EqualsHashCode
+            ExplicitInitialization
+            FallThrough
+            FinalLocalVariable
+            HiddenField
+            IllegalCatch
+            IllegalInstantiation
+            IllegalThrows
+            IllegalToken
+            IllegalTokenText
+            IllegalType
+            InnerAssignment
+            MagicNumber
+            MatchXpath
+            MissingCtor
+            MissingSwitchDefault
+            ModifiedControlVariable
+            MultipleStringLiterals
+                MultipleVariableDeclarations:每一个变量的定义必须在它的声明处，且在同一行
+            NestedForDepth
+            NestedIfDepth
+            NestedTryDepth
+            NoArrayTrailingComma
+            NoClone
+            NoEnumTrailingComma
+            NoFinalizer
+                OneStatementPerLine:确保每行只有一条语句
+            OverloadMethodsDeclarationOrder
+            PackageDeclaration
+            ParameterAssignment
+            RequireThis
+            ReturnCount
+                SimplifyBooleanExpression:检查是否有过度复杂的布尔表达式
+                SimplifyBooleanReturn:检查是否有过于复杂的布尔返回代码段
+                StringLiteralEquality:检查字符串是否有用==或!=进行操作
+            SuperClone
+            SuperFinalize
+            UnnecessaryParentheses
+            UnnecessarySemicolonAfterOuterTypeDeclaration
+            UnnecessarySemicolonAfterTypeMemberDeclaration
+            UnnecessarySemicolonInEnumeration
+            UnnecessarySemicolonInTryWithResources
+            VariableDeclarationUsageDistance:声明及第一次使用距离,默认3行
+        -->
+        <module name="EmptyStatement"/>
+        <module name="MultipleVariableDeclarations"/>
+        <module name="OneStatementPerLine"/>
+        <module name="SimplifyBooleanExpression"/>
+        <module name="SimplifyBooleanReturn"/>
+        <module name="StringLiteralEquality"/>
+
+        <!-- Headers(不用) -->
+        <!-- Imports -->
+        <!--
+                AvoidStarImport:必须导入类的完整路径，即不能使用*导入所需的类
+            AvoidStaticImport
+            CustomImportOrder
+                IllegalImport:检查是否从非法的包中导入了类
+            ImportControl
+            ImportOrder
+                RedundantImport:不允许重复导入
+                UnusedImports:排除没用的import
+        -->
+        <module name="AvoidStarImport"/>
+        <module name="IllegalImport">
+            <property name="illegalClasses"
+                      value="java.util.Vector, org.junit.jupiter.api.Assertions "/>
+            <message key="import.illegal" value="禁止导入的类."/>
+        </module>
+        <module name="RedundantImport"/>
+        <module name="UnusedImports">
+            <property name="processJavadoc" value="true"/>
+        </module>
+
+        <!-- Javadoc Comments -->
+        <!--
+                AtclauseOrder:检查注释顺序，默认:@author, @version, @param, @return, @throws, @exception, @see, @since, @serial, @serialField, @serialData, @deprecated
+                InvalidJavadocPosition:检查javadoc是否位于正确的位置
+                JavadocBlockTagLocation:Javadoc 内容应该从 /** 之后的下一行开始
+            JavadocContentLocation
+                JavadocMethod
+                JavadocMissingLeadingAsterisk:检查javadoc的每行是否有前导星号。
+                JavadocMissingWhitespaceAfterAsterisk:检查javadoc前导星号后是否有空格。
+            JavadocPackage
+                JavadocParagraph:检查javadoc段落
+                JavadocStyle:验证Javadoc注释，以确保它们是格式良好的。
+            JavadocTagContinuationIndentation:检查块标记中延续行的缩进
+            JavadocType:
+                JavadocVariable:检查属性(包括private)是否有Javadoc注释，忽略了serialVersionUID字段。
+                MissingJavadocMethod:检查方法或构造函数是否缺少Javadoc注释
+            MissingJavadocPackage
+            MissingJavadocType
+                NonEmptyAtclauseDescription:检查块标签后面是否有描述
+                RequireEmptyLineBeforeBlockTagGroup:检查块标记之前的空行是否在Javadoc中存在
+                SingleLineJavadoc
+            SummaryJavadoc
+                WriteTag:定义必须要写的注释tag
+        -->
+        <module name="AtclauseOrder">
+            <!-- 类级别:类，接口，枚举，值类型(record) -->
+            <property name="target" value="CLASS_DEF, INTERFACE_DEF, ENUM_DEF , RECORD_DEF"/>
+            <property name="tagOrder" value="@param, @author, @version, @see, @since, @deprecated"/>
+        </module>
+        <module name="AtclauseOrder">
+            <!-- 方法级别 -->
+            <property name="target" value="METHOD_DEF, CTOR_DEF, VARIABLE_DEF, COMPACT_CTOR_DEF"/>
+            <property name="tagOrder" value="@param, @return, @throws, @see, @since, @deprecated"/>
+        </module>
+
+        <module name="InvalidJavadocPosition"/>
+        <module name="JavadocContentLocationCheck"/>
+        <module name="JavadocMethod">
+            <property name="allowMissingParamTags" value="false"/>
+            <property name="allowMissingReturnTag" value="false"/>
+            <property name="validateThrows" value="true"/>
+            <message key="javadoc.return.expected" value="@return应存在说明"/>
+        </module>
+        <module name="JavadocMissingLeadingAsterisk"/>
+        <module name="JavadocMissingWhitespaceAfterAsterisk"/>
+        <module name="JavadocParagraph"/>
+        <module name="JavadocStyle">
+            <!-- 检查javadoc首句是否以正确的结束符结束 -->
+            <!-- 是否允许以中文句号结尾.
+            <property name="endOfSentenceFormat" value="([.?!。][ \t\n\r\f&lt;])|([.?!。]$)"/>
+            <message key="javadoc.noPeriod" value="Javadoc首句应以(.?!。)结尾"/>
+            -->
+            <property name="checkEmptyJavadoc" value="true"/>
+            <message key="javadoc.noPeriod" value="Javadoc首句应以(.?!)结尾"/>
+        </module>
+        <module name="JavadocType">
+            <!--不允许不明确的标签-->
+            <property name="allowUnknownTags" value="false"/>
+        </module>
+        <module name="JavadocVariable">
+            <property name="scope" value="public"/>
+        </module>
+
+        <module name="MissingJavadocMethod">
+            <property name="allowedAnnotations" value="Override, Test, Before, After, BeforeClass, AfterClass"/>
+            <property name="scope" value="public"/>
+            <!--是否允许在属性(setter和getter)的方法上丢失Javadoc-->
+            <property name="allowMissingPropertyJavadoc" value="true"/>
+            <property name="ignoreMethodNamesRegex" value="^set[A-Z].*|^get[A-Z].*|main"/>
+        </module>
+
+        <module name="NonEmptyAtclauseDescription"/>
+        <module name="RequireEmptyLineBeforeBlockTagGroup"/>
+        <module name="SingleLineJavadoc">
+            <property name="ignoreInlineTags" value="false"/>
+        </module>
+
+        <module name="WriteTag">
+            <property name="tag" value="@author"/>
+            <property name="tagSeverity" value="ignore"/>
+        </module>
+        <!--
+        <module name="WriteTag">
+            <property name="tag" value="@version"/>
+            <property name="tagSeverity" value="ignore"/>
+        </module>
+        -->
+        <module name="WriteTag">
+            <property name="tag" value="@since"/>
+            <property name="tagSeverity" value="ignore"/>
+            <!--yyyy-mm-dd-->
+            <property name="tagFormat" value="^([0-9]{4})/([0]{1}[0-9]{1}|[1]{1}[0-2]{1})/(0[1-9]|[12][0-9]|3[0-1])$"/>
+            <message key="type.tagFormat" value="@since格式为yyyy/MM/dd"/>
+        </module>
+
+
+        <!-- Metrics(spring没有) -->
+        <!-- Miscellaneous(杂项) -->
+        <!--
+                ArrayTypeStyle:Check强制使用Java风格的数组定义
+            AvoidEscapedUnicodeCharacters
+                CommentsIndentation:控制注释和周围代码之间的缩进
+            DescendantToken
+            FinalParameters
+                Indentation:检查Java代码的缩进
+            NewlineAtEndOfFile
+            NoCodeInFile
+            OrderedProperties
+                OuterTypeFilename:检查外部类型名和文件名是否匹配。例如，类Foo必须在一个名为Foo.java的文件中。
+            TodoComment
+                TrailingComment:不要使用行尾注释
+            Translation:检查property文件中是否有相同的key。(无效?)
+            UncommentedMain
+            UniqueProperties::检测Properties属性文件中重复的键。(无效?)
+                UpperEll:检查long型约束是否有大写的'L'
+        -->
+        <module name="ArrayTypeStyle"/>
+        <module name="CommentsIndentation"/>
+        <module name="Indentation">
+            <!--注解子元素缩进8,原来为4.
+            例如
+            @Configuration
+            @Import({JavaxExceptionHandlerAdvice.class, JavaxExceptionHandlerSelector.class, JakartaExceptionHandlerAdvice.class,
+                    JakartaExceptionHandlerSelector.class})
+            public class ExceptionAutoConfiguration {
+            }
+            JakartaExceptionHandlerSelector缩进为8
+            -->
+            <property name="arrayInitIndent" value="8"/>
+        </module>
+
+        <module name="OuterTypeFilename"/>
+        <module name="TrailingComment"/>
+        <module name="UpperEll"/>
+
+
+        <!-- Modifiers(spring没有) -->
+        <!-- Naming Conventions(spring没有) -->
+        <!--
+            AbbreviationAsWordInName
+            AbstractClassName(不用):确保抽象类的名称符合某些模式，默认以Abstract开头。
+                CatchParameterName:catch参数名是否符合指定模式的检查。
+                ClassTypeParameterName:检查类类型参数名称是否符合指定的模式。
+                ConstantName:检查常量名称是否符合指定的模式
+            IllegalIdentifierName
+                InterfaceTypeParameterName:检查接口类型参数名称是否符合指定的模式。
+            LambdaParameterName
+            LocalFinalVariableName
+                LocalVariableName:检查non-final变量名是否符合指定的模式。
+                MemberName:检查实例变量名是否符合指定的模式。
+                MethodName:检查方法名是否符合指定的模式。
+                MethodTypeParameterName:检查方法类型参数名称是否符合指定的模式。
+                PackageName:检查包名是否符合指定的模式,包名的检查(只允许小写字母)
+                ParameterName:检查方法参数名是否符合指定的模式。
+            PatternVariableName
+            RecordComponentName
+            RecordTypeParameterName
+            StaticVariableName
+            TypeName
+        -->
+        <module name="CatchParameterName"/>
+        <module name="ClassTypeParameterName">
+            <property name="format" value="^[A-Z]+$"/>
+        </module>
+        <module name="ConstantName"/>
+        <module name="InterfaceTypeParameterName">
+            <property name="format" value="^[A-Z]+$"/>
+        </module>
+        <module name="PackageName">
+            <property name="format" value="^[a-z]+(\.[a-z][a-z0-9]*)*$"/>
+        </module>
+        <module name="LocalVariableName"/>
+        <module name="MemberName"/>
+        <module name="MethodName"/>
+        <module name="MethodTypeParameterName"/>
+        <module name="ParameterName"/>
+
+        <!-- Regexp -->
+
+        <!-- Size Violations(spring没有) -->
+        <!--
+            AnonInnerLength:检查匿名内部类长度。
+            ExecutableStatementCount:检查可执行的语句数量
+            FileLength
+            LambdaBodyLength
+                LineLength:每行的最大长度
+            MethodCount
+                MethodLength
+            OuterTypeNumber
+            ParameterNumber
+            RecordComponentNumber
+        -->
+        <module name="MethodLength">
+            <property name="max" value="100"/>
+        </module>
+
+        <!-- Whitespace(spring没有) -->
+        <!--
+            EmptyForInitializerPad
+            EmptyForIteratorPad
+                EmptyLineSeparator:检查头、包、所有导入声明、字段、构造函数、方法、嵌套类、静态初始化器和实例初始化器之后的空行分隔符
+            FileTabCharacter(不用)
+                GenericWhitespace:检查通用标记周围的空格(尖括号)"<"和">"是正确的典型约定。该约定是不可配置的
+                MethodParamPad
+                NoLineWrap:检查所选语句是否没被换行。
+            NoWhitespaceAfter
+                NoWhitespaceBefore:检查标记之前是否有空格s
+            NoWhitespaceBeforeCaseDefaultColon
+                OperatorWrap:检查如何在操作符上换行的策略。默认nl
+            ParenPad
+                SeparatorWrap:用分隔符检查行包装
+                SingleSpaceSeparator:检查非空格字符由不超过一个空格分隔。
+                TypecastParenPad:检查类型转换时括号的填充策略。
+                WhitespaceAfter:检查分隔符是否在空格之后
+                WhitespaceAround:检查分隔符周围是否有空白。格式化代码检查很需要
+        -->
+        <module name="EmptyLineSeparator">
+            <property name="tokens"
+                      value="PACKAGE_DEF, IMPORT, STATIC_IMPORT, CLASS_DEF, INTERFACE_DEF, ENUM_DEF,
+                    STATIC_INIT, INSTANCE_INIT, METHOD_DEF, CTOR_DEF, VARIABLE_DEF, RECORD_DEF,
+                    COMPACT_CTOR_DEF"/>
+            <property name="allowNoEmptyLineBetweenFields" value="false"/>
+        </module>
+        <module name="MethodParamPad"/>
+        <module name="NoLineWrap"/>
+        <module name="NoWhitespaceBefore"/>
+        <module name="OperatorWrap"/>
+        <module name="SeparatorWrap">
+            <!--.应该在一个新的行上-->
+            <property name="id" value="SeparatorWrapDot"/>
+            <property name="tokens" value="DOT"/>
+            <property name="option" value="nl"/>
+        </module>
+        <module name="SeparatorWrap">
+            <!--,应该位于行尾-->
+            <property name="id" value="SeparatorWrapComma"/>
+            <property name="tokens" value="COMMA"/>
+            <property name="option" value="EOL"/>
+        </module>
+        <module name="SeparatorWrap">
+            <property name="id" value="SeparatorWrapEllipsis"/>
+            <property name="tokens" value="ELLIPSIS"/>
+            <property name="option" value="EOL"/>
+        </module>
+        <module name="SeparatorWrap">
+            <property name="id" value="SeparatorWrapArrayDeclarator"/>
+            <property name="tokens" value="ARRAY_DECLARATOR"/>
+            <property name="option" value="EOL"/>
+        </module>
+        <module name="SeparatorWrap">
+            <property name="id" value="SeparatorWrapMethodRef"/>
+            <property name="tokens" value="METHOD_REF"/>
+            <property name="option" value="nl"/>
+        </module>
+        <module name="SingleSpaceSeparator">
+            <property name="validateComments" value="true"/>
+        </module>
+        <module name="TypecastParenPad"/>
+        <module name="WhitespaceAfter"/>
+        <module name="WhitespaceAround">
+            <property name="allowEmptyConstructors" value="true"/>
+            <property name="allowEmptyMethods" value="true"/>
+        </module>
+
+        <!-- 自定义checks -->
+        <!-- custom -->
+        <!--        <module name="com.dalaran.framework.checkstyle.checks.custom.UnitTestClassNameCheck"/>-->
+        <!--        <module name="com.dalaran.framework.checkstyle.checks.custom.UnitTestExecutableMethodNameCheck"/>-->
+        <!--        <module name="com.dalaran.framework.checkstyle.checks.custom.SingleLineCommentCheck"/>-->
+    </module>
+</module>

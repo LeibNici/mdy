@@ -2,6 +2,7 @@ import org.gradle.external.javadoc.StandardJavadocDocletOptions
 
 plugins {
     java
+    checkstyle
     id("org.springframework.boot") version "3.2.12"
     id("io.spring.dependency-management") version "1.1.7"
 }
@@ -46,4 +47,10 @@ tasks.withType<Javadoc> {
         charSet = "UTF-8"
         addStringOption("Xdoclint:all,-missing", "-quiet")
     }
+}
+
+checkstyle {
+    toolVersion = "10.17.0"
+    configFile = file("docs/checkstyle.xml")
+    isIgnoreFailures = false
 }

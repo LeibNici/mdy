@@ -4,18 +4,20 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * 简道云服务启动入口。
+ * 缁犫偓闁挷绨張宥呭閸氼垰濮╅崗銉ュ經閵? *
  *
  * @author Codex
- * @since 0.1.0
+ *
+ * @since 2026/02/28
  */
 @SpringBootApplication
+
 public class Application {
 
     /**
-     * 启动 Spring Boot 应用。
-     *
-     * @param args 启动参数
+     * 閸氼垰濮?Spring Boot 鎼存梻鏁ら妴?     *
+ *
+ * @param args 閸氼垰濮╅崣鍌涙殶
      */
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);

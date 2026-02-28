@@ -9,22 +9,32 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * 表单定义聚合根。
+ * 鐞涖劌宕熺€规矮绠熼懕姘値閺嶅箍鈧? *
  *
  * @author Codex
- * @since 0.1.0
+ *
+ * @since 2026/02/28
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+
 public class FormDefinition {
+
     private String id;
+
     private String name;
+
     private String description;
+
     private FormStatus status;
+
     private int version;
+
     private List<FieldDefinition> fields;
+
     private Instant createdAt;
+
     private Instant updatedAt;
 }

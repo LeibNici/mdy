@@ -4,18 +4,21 @@ import com.jiandaoyun.domain.metadata.FormDefinition;
 import java.util.Map;
 
 /**
- * 数据校验服务接口。
+ * 閺佺増宓侀弽锟犵崣閺堝秴濮熼幒銉ュ經閵? *
  *
  * @author Codex
- * @since 0.1.0
+ *
+ * @since 2026/02/28
  */
+
 public interface ValidatorService {
 
     /**
-     * 按表单定义校验提交数据。
-     *
-     * @param formDefinition 表单定义
-     * @param data 提交数据
+     * 閹稿銆冮崡鏇炵暰娑斿鐗庢灞惧絹娴溿倖鏆熼幑顔衡偓?     *
+ *
+ * @param formDefinition 鐞涖劌宕熺€规矮绠?
+ *
+ * @param data 閹绘劒姘﹂弫鐗堝祦
      */
     void validateSubmission(FormDefinition formDefinition, Map<String, Object> data);
 }

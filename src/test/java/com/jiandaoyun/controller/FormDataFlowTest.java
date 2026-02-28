@@ -2,7 +2,6 @@ package com.jiandaoyun.controller;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -16,6 +15,13 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+/**
+ * 表单与数据提交流程集成测试.
+ *
+ * @author Codex
+ *
+ * @since 2026/02/28
+ */
 @SpringBootTest
 @AutoConfigureMockMvc
 class FormDataFlowTest {
@@ -48,7 +54,9 @@ class FormDataFlowTest {
 
         JsonNode formJson = objectMapper.readTree(formResult.getResponse().getContentAsString());
         String formId = formJson.path("data").path("id").asText();
-        Assertions.assertFalse(formId.isBlank());
+        if (formId.isBlank()) {
+            throw new IllegalStateException("formId should not be blank");
+        }
 
         String submitBody = """
             {

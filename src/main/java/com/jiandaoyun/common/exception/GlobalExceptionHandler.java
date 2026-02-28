@@ -10,19 +10,22 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 /**
- * 全局异常处理器，将异常统一转换为 API 响应。
+ * 閸忋劌鐪鍌氱埗婢跺嫮鎮婇崳顭掔礉鐏忓棗绱撶敮鍝ョ埠娑撯偓鏉烆剚宕叉稉?API 閸濆秴绨查妴? *
  *
  * @author Codex
- * @since 0.1.0
+ *
+ * @since 2026/02/28
  */
 @RestControllerAdvice
+
 public class GlobalExceptionHandler {
 
     /**
-     * 处理业务异常。
-     *
-     * @param ex 业务异常
-     * @return 400 响应
+     * 婢跺嫮鎮婃稉姘瀵倸鐖堕妴?     *
+ *
+ * @param ex 娑撴艾濮熷鍌氱埗
+ *
+ * @return 400 閸濆秴绨?
      */
     @ExceptionHandler(BusinessException.class)
     public ResponseEntity<ApiResponse<Void>> handleBusiness(BusinessException ex) {
@@ -31,10 +34,11 @@ public class GlobalExceptionHandler {
     }
 
     /**
-     * 处理参数校验异常。
-     *
-     * @param ex 参数校验异常
-     * @return 400 响应
+     * 婢跺嫮鎮婇崣鍌涙殶閺嶏繝鐛欏鍌氱埗閵?     *
+ *
+ * @param ex 閸欏倹鏆熼弽锟犵崣瀵倸鐖?
+ *
+ * @return 400 閸濆秴绨?
      */
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ApiResponse<Void>> handleValid(MethodArgumentNotValidException ex) {
@@ -46,10 +50,11 @@ public class GlobalExceptionHandler {
     }
 
     /**
-     * 处理未捕获异常。
-     *
-     * @param ex 未知异常
-     * @return 500 响应
+     * 婢跺嫮鎮婇張顏呭礋閼惧嘲绱撶敮鎼炩偓?     *
+ *
+ * @param ex 閺堫亞鐓″鍌氱埗
+ *
+ * @return 500 閸濆秴绨?
      */
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiResponse<Void>> handleOther(Exception ex) {

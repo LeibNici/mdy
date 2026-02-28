@@ -3,18 +3,20 @@ package com.jiandaoyun.service.report;
 import com.jiandaoyun.dto.response.ReportSummaryResponse;
 
 /**
- * 报表聚合服务接口。
+ * 閹躲儴銆冮懕姘値閺堝秴濮熼幒銉ュ經閵? *
  *
  * @author Codex
- * @since 0.1.0
+ *
+ * @since 2026/02/28
  */
+
 public interface ReportService {
 
     /**
-     * 获取表单汇总统计。
-     *
-     * @param formId 表单 ID
-     * @return 汇总响应
-     */
+     * 閼惧嘲褰囩悰銊ュ礋濮瑰洦鈧崵绮虹拋掳鈧?     *
+ *
+ * @param formId 鐞涖劌宕?ID
+ *
+ * @return 濮瑰洦鈧鎼锋惔? */
     ReportSummaryResponse getFormSummary(String formId);
 }

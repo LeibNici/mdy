@@ -8,22 +8,32 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * 单条业务数据对应的流程实例。
+ * 閸楁洘娼稉姘閺佺増宓佺€电懓绨查惃鍕ウ缁嬪鐤勬笟瀣ㄢ偓? *
  *
  * @author Codex
- * @since 0.1.0
+ *
+ * @since 2026/02/28
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+
 public class WorkflowInstance {
+
     private String id;
+
     private String formId;
+
     private String recordId;
+
     private String applicant;
+
     private String currentTaskId;
+
     private WorkflowStatus status;
+
     private Instant createdAt;
+
     private Instant updatedAt;
 }

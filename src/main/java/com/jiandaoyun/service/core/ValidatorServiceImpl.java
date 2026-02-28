@@ -8,10 +8,11 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 
 /**
- * 默认字段校验实现。
+ * 默认字段校验实现.
  *
  * @author Codex
- * @since 0.1.0
+ *
+ * @since 2026/02/28
  */
 @Service
 public class ValidatorServiceImpl implements ValidatorService {
@@ -19,7 +20,7 @@ public class ValidatorServiceImpl implements ValidatorService {
     /**
      * {@inheritDoc}
      *
-     * @throws BusinessException 必填项缺失或类型不匹配时抛出
+     * @throws BusinessException 必填项缺失或字段类型不匹配时抛出
      */
     @Override
     public void validateSubmission(FormDefinition formDefinition, Map<String, Object> data) {
@@ -35,11 +36,15 @@ public class ValidatorServiceImpl implements ValidatorService {
     }
 
     /**
-     * 校验字段值类型。
+     * 校验字段值类型.
      *
-     * @param fieldType 预期类型
-     * @param key 字段键
+     * @param fieldType 预期字段类型
+     *
+     * @param key 字段键名
+     *
      * @param value 字段值
+     *
+     * @throws BusinessException 字段值类型不匹配时抛出
      */
     private void validateType(FieldType fieldType, String key, Object value) {
         boolean valid = switch (fieldType) {

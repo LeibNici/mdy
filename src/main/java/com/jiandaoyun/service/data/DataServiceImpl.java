@@ -14,22 +14,26 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.springframework.stereotype.Service;
 
 /**
- * 动态数据服务内存实现。
+ * 动态数据服务内存实现.
  *
  * @author Codex
- * @since 0.1.0
+ *
+ * @since 2026/02/28
  */
 @Service
 public class DataServiceImpl implements DataService {
 
     private final FormService formService;
+
     private final ValidatorService validatorService;
+
     private final ConcurrentHashMap<String, List<Map<String, Object>>> records = new ConcurrentHashMap<>();
 
     /**
-     * 构造函数。
+     * 构造函数.
      *
      * @param formService 表单服务
+     *
      * @param validatorService 校验服务
      */
     public DataServiceImpl(FormService formService, ValidatorService validatorService) {

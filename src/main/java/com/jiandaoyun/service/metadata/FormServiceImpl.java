@@ -12,12 +12,14 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.springframework.stereotype.Service;
 
 /**
- * 表单服务内存实现。
+ * 鐞涖劌宕熼張宥呭閸愬懎鐡ㄧ€圭偟骞囬妴? *
  *
  * @author Codex
- * @since 0.1.0
+ *
+ * @since 2026/02/28
  */
 @Service
+
 public class FormServiceImpl implements FormService {
 
     private final ConcurrentHashMap<String, FormDefinition> formStore = new ConcurrentHashMap<>();
@@ -56,7 +58,7 @@ public class FormServiceImpl implements FormService {
     /**
      * {@inheritDoc}
      *
-     * @throws BusinessException 表单不存在时抛出
+ * @throws BusinessException 鐞涖劌宕熸稉宥呯摠閸︺劍妞傞幎娑樺毉
      */
     @Override
     public FormDefinition getById(String formId) {

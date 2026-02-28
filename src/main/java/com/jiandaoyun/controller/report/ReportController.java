@@ -9,32 +9,34 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 报表查询控制器。
+ * 閹躲儴銆冮弻銉嚄閹貉冨煑閸ｃ劊鈧? *
  *
  * @author Codex
- * @since 0.1.0
+ *
+ * @since 2026/02/28
  */
 @RestController
 @RequestMapping("/api/reports")
+
 public class ReportController {
 
     private final ReportService reportService;
 
     /**
-     * 构造函数。
-     *
-     * @param reportService 报表服务
+     * 閺嬪嫰鈧姴鍤遍弫鑸偓?     *
+ *
+ * @param reportService 閹躲儴銆冮張宥呭
      */
     public ReportController(ReportService reportService) {
         this.reportService = reportService;
     }
 
     /**
-     * 按表单获取汇总报表。
-     *
-     * @param formId 表单 ID
-     * @return 汇总结果
-     */
+     * 閹稿銆冮崡鏇″箯閸欐牗鐪归幀缁樺Г鐞涖劊鈧?     *
+ *
+ * @param formId 鐞涖劌宕?ID
+ *
+ * @return 濮瑰洦鈧崵绮ㄩ弸? */
     @GetMapping("/forms/{formId}/summary")
     public ApiResponse<ReportSummaryResponse> getFormSummary(@PathVariable String formId) {
         return ApiResponse.ok(reportService.getFormSummary(formId));

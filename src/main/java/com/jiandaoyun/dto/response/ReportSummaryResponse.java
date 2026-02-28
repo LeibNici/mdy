@@ -4,14 +4,18 @@ import lombok.Builder;
 import lombok.Data;
 
 /**
- * 表单汇总报表响应。
+ * 鐞涖劌宕熷Ч鍥ㄢ偓缁樺Г鐞涖劌鎼锋惔鏂烩偓? *
  *
  * @author Codex
- * @since 0.1.0
+ *
+ * @since 2026/02/28
  */
 @Data
 @Builder
+
 public class ReportSummaryResponse {
+
     private String formId;
+
     private long totalRecords;
 }
