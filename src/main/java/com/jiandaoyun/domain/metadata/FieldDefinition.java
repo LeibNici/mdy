@@ -6,6 +6,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Field metadata definition inside a form.
+ */
 @Data
 @Builder
 @NoArgsConstructor

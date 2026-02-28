@@ -11,11 +11,17 @@ import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import org.springframework.stereotype.Service;
 
+/**
+ * In-memory implementation of {@link FormService}.
+ */
 @Service
 public class FormServiceImpl implements FormService {
 
     private final ConcurrentHashMap<String, FormDefinition> formStore = new ConcurrentHashMap<>();
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public FormDefinition create(CreateFormRequest request) {
         String formId = IdGenerator.nextId();
@@ -44,15 +50,23 @@ public class FormServiceImpl implements FormService {
         return form;
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @throws BusinessException when form does not exist
+     */
     @Override
     public FormDefinition getById(String formId) {
         FormDefinition form = formStore.get(formId);
         if (form == null) {
-            throw new BusinessException("表单不存在: " + formId);
+            throw new BusinessException("form not found: " + formId);
         }
         return form;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<FormDefinition> listAll() {
         return formStore.values().stream().toList();

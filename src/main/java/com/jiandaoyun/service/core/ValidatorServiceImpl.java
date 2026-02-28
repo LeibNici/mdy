@@ -7,15 +7,23 @@ import com.jiandaoyun.domain.metadata.FormDefinition;
 import java.util.Map;
 import org.springframework.stereotype.Service;
 
+/**
+ * Default field-level validator implementation.
+ */
 @Service
 public class ValidatorServiceImpl implements ValidatorService {
 
+    /**
+     * {@inheritDoc}
+     *
+     * @throws BusinessException when required field is missing or type mismatch occurs
+     */
     @Override
     public void validateSubmission(FormDefinition formDefinition, Map<String, Object> data) {
         for (FieldDefinition field : formDefinition.getFields()) {
             Object value = data.get(field.getKey());
             if (field.isRequired() && value == null) {
-                throw new BusinessException("必填字段缺失: " + field.getKey());
+                throw new BusinessException("required field is missing: " + field.getKey());
             }
             if (value != null) {
                 validateType(field.getType(), field.getKey(), value);
@@ -23,6 +31,13 @@ public class ValidatorServiceImpl implements ValidatorService {
         }
     }
 
+    /**
+     * Validates field value type.
+     *
+     * @param fieldType expected type
+     * @param key field key
+     * @param value field value
+     */
     private void validateType(FieldType fieldType, String key, Object value) {
         boolean valid = switch (fieldType) {
             case TEXT -> value instanceof String;
@@ -31,7 +46,7 @@ public class ValidatorServiceImpl implements ValidatorService {
             case DATE -> value instanceof String;
         };
         if (!valid) {
-            throw new BusinessException("字段类型错误: " + key + " 应为 " + fieldType);
+            throw new BusinessException("field type mismatch: " + key + " expects " + fieldType);
         }
     }
 }

@@ -7,6 +7,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Runtime workflow instance for one data record.
+ */
 @Data
 @Builder
 @NoArgsConstructor

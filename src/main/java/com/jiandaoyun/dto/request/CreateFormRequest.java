@@ -8,27 +8,33 @@ import jakarta.validation.constraints.NotNull;
 import java.util.List;
 import lombok.Data;
 
+/**
+ * Request payload for creating a form definition.
+ */
 @Data
 public class CreateFormRequest {
 
-    @NotBlank(message = "表单名称不能为空")
+    @NotBlank(message = "form name cannot be blank")
     private String name;
 
     private String description;
 
     @Valid
-    @NotEmpty(message = "字段列表不能为空")
+    @NotEmpty(message = "fields cannot be empty")
     private List<FieldRequest> fields;
 
+    /**
+     * Request payload for creating one field in a form.
+     */
     @Data
     public static class FieldRequest {
-        @NotBlank(message = "字段key不能为空")
+        @NotBlank(message = "field key cannot be blank")
         private String key;
 
-        @NotBlank(message = "字段标题不能为空")
+        @NotBlank(message = "field label cannot be blank")
         private String label;
 
-        @NotNull(message = "字段类型不能为空")
+        @NotNull(message = "field type cannot be null")
         private FieldType type;
 
         private boolean required;

@@ -6,6 +6,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Task node in a workflow instance.
+ */
 @Data
 @Builder
 @NoArgsConstructor

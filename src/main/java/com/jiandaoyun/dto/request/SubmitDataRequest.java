@@ -5,12 +5,15 @@ import jakarta.validation.constraints.NotNull;
 import java.util.Map;
 import lombok.Data;
 
+/**
+ * Request payload for submitting one form record.
+ */
 @Data
 public class SubmitDataRequest {
 
-    @NotBlank(message = "formId不能为空")
+    @NotBlank(message = "formId cannot be blank")
     private String formId;
 
-    @NotNull(message = "data不能为空")
+    @NotNull(message = "data cannot be null")
     private Map<String, Object> data;
 }

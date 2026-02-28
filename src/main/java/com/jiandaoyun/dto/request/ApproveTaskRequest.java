@@ -4,19 +4,22 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
+/**
+ * Request payload for approving or rejecting a workflow task.
+ */
 @Data
 public class ApproveTaskRequest {
 
-    @NotBlank(message = "instanceId不能为空")
+    @NotBlank(message = "instanceId cannot be blank")
     private String instanceId;
 
-    @NotBlank(message = "taskId不能为空")
+    @NotBlank(message = "taskId cannot be blank")
     private String taskId;
 
-    @NotBlank(message = "审批人不能为空")
+    @NotBlank(message = "approver cannot be blank")
     private String approver;
 
-    @NotNull(message = "approved不能为空")
+    @NotNull(message = "approved cannot be null")
     private Boolean approved;
 
     private String comment;

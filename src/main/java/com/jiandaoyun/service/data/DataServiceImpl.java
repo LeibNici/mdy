@@ -13,6 +13,9 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import org.springframework.stereotype.Service;
 
+/**
+ * In-memory implementation of {@link DataService}.
+ */
 @Service
 public class DataServiceImpl implements DataService {
 
@@ -20,11 +23,20 @@ public class DataServiceImpl implements DataService {
     private final ValidatorService validatorService;
     private final ConcurrentHashMap<String, List<Map<String, Object>>> records = new ConcurrentHashMap<>();
 
+    /**
+     * Creates service instance.
+     *
+     * @param formService form metadata service
+     * @param validatorService data validator service
+     */
     public DataServiceImpl(FormService formService, ValidatorService validatorService) {
         this.formService = formService;
         this.validatorService = validatorService;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Map<String, Object> submit(SubmitDataRequest request) {
         FormDefinition form = formService.getById(request.getFormId());
@@ -39,6 +51,9 @@ public class DataServiceImpl implements DataService {
         return record;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Map<String, Object>> listByFormId(String formId) {
         return records.getOrDefault(formId, List.of());

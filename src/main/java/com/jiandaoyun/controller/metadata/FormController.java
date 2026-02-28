@@ -13,26 +13,51 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * REST controller for form metadata management.
+ */
 @RestController
 @RequestMapping("/api/forms")
 public class FormController {
 
     private final FormService formService;
 
+    /**
+     * Creates controller instance.
+     *
+     * @param formService form service
+     */
     public FormController(FormService formService) {
         this.formService = formService;
     }
 
+    /**
+     * Creates a new form.
+     *
+     * @param request create form request
+     * @return created form
+     */
     @PostMapping
     public ApiResponse<FormDefinition> create(@Valid @RequestBody CreateFormRequest request) {
         return ApiResponse.ok(formService.create(request));
     }
 
+    /**
+     * Gets form detail by ID.
+     *
+     * @param formId form ID
+     * @return form detail
+     */
     @GetMapping("/{formId}")
     public ApiResponse<FormDefinition> getById(@PathVariable String formId) {
         return ApiResponse.ok(formService.getById(formId));
     }
 
+    /**
+     * Lists all forms.
+     *
+     * @return all forms
+     */
     @GetMapping
     public ApiResponse<List<FormDefinition>> listAll() {
         return ApiResponse.ok(formService.listAll());
