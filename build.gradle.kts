@@ -13,12 +13,6 @@ java {
     }
 }
 
-repositories {
-    maven("https://maven.aliyun.com/repository/public")
-    maven("https://maven.aliyun.com/repository/central")
-    mavenCentral()
-}
-
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-validation")
@@ -34,6 +28,8 @@ dependencies {
 
     runtimeOnly("com.mysql:mysql-connector-j")
 
+    testCompileOnly("org.projectlombok:lombok")
+    testAnnotationProcessor("org.projectlombok:lombok")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
