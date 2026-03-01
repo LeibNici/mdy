@@ -1,12 +1,12 @@
 package com.jiandaoyun.data.application.service;
 
 import com.jiandaoyun.common.utils.IdGenerator;
-import com.jiandaoyun.core.engine.FormEngine;
 import com.jiandaoyun.data.domain.event.DataSubmittedEvent;
 import com.jiandaoyun.data.domain.repository.FormDataRecordRepository;
 import com.jiandaoyun.domain.metadata.FormDefinition;
 import com.jiandaoyun.dto.request.SubmitDataRequest;
 import com.jiandaoyun.metadata.application.service.FormApplicationService;
+import com.jiandaoyun.metadata.domain.service.FormDomainService;
 import com.jiandaoyun.shared.kernel.event.DomainEventPublisher;
 import com.jiandaoyun.shared.kernel.validation.ValidatorService;
 import java.time.Instant;
@@ -27,7 +27,7 @@ public class DataApplicationService {
 
     private final FormApplicationService formApplicationService;
 
-    private final FormEngine formEngine;
+    private final FormDomainService formDomainService;
 
     private final ValidatorService validatorService;
 
@@ -39,20 +39,20 @@ public class DataApplicationService {
      * 构造数据应用服务实例.
      *
      * @param formApplicationService 表单应用服务.
-     * @param formEngine 表单引擎.
+     * @param formDomainService 表单领域服务.
      * @param validatorService 校验服务.
      * @param formDataRecordRepository 表单数据记录仓储.
      * @param domainEventPublisher 领域事件发布器.
      */
     public DataApplicationService(
         FormApplicationService formApplicationService,
-        FormEngine formEngine,
+        FormDomainService formDomainService,
         ValidatorService validatorService,
         FormDataRecordRepository formDataRecordRepository,
         DomainEventPublisher domainEventPublisher
     ) {
         this.formApplicationService = formApplicationService;
-        this.formEngine = formEngine;
+        this.formDomainService = formDomainService;
         this.validatorService = validatorService;
         this.formDataRecordRepository = formDataRecordRepository;
         this.domainEventPublisher = domainEventPublisher;
@@ -66,7 +66,7 @@ public class DataApplicationService {
      */
     public Map<String, Object> submit(SubmitDataRequest request) {
         FormDefinition form = formApplicationService.getById(request.getFormId());
-        Map<String, Object> normalizedData = formEngine.normalizeSubmission(form, request.getData());
+        Map<String, Object> normalizedData = formDomainService.normalizeSubmission(form, request.getData());
         validatorService.validateSubmission(form, normalizedData);
 
         Map<String, Object> record = new HashMap<>(normalizedData);

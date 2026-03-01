@@ -1,4 +1,4 @@
-package com.jiandaoyun.core.engine;
+package com.jiandaoyun.metadata.domain.service;
 
 import com.jiandaoyun.common.enums.FormStatus;
 import com.jiandaoyun.common.exception.BusinessException;
@@ -14,14 +14,14 @@ import java.util.Set;
 import org.springframework.stereotype.Component;
 
 /**
- * 表单引擎.
+ * 表单领域服务，负责构建表单定义与提交数据规范化.
  *
  * @author chenming
  *
- * @since 2026/02/28
+ * @since 2026/03/01
  */
 @Component
-public class FormEngine {
+public class FormDomainService {
 
     /**
      * 构建表单定义对象.
@@ -74,6 +74,7 @@ public class FormEngine {
      *
      * @param fieldRequests 字段请求列表.
      * @return 字段定义列表.
+     * @throws BusinessException 字段键重复时抛出异常.
      */
     private List<FieldDefinition> buildFields(List<CreateFormRequest.FieldRequest> fieldRequests) {
         Set<String> keySet = new HashSet<>();

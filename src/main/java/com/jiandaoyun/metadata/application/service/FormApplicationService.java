@@ -2,9 +2,9 @@ package com.jiandaoyun.metadata.application.service;
 
 import com.jiandaoyun.common.exception.BusinessException;
 import com.jiandaoyun.common.utils.IdGenerator;
-import com.jiandaoyun.core.engine.FormEngine;
 import com.jiandaoyun.domain.metadata.FormDefinition;
 import com.jiandaoyun.dto.request.CreateFormRequest;
+import com.jiandaoyun.metadata.domain.service.FormDomainService;
 import com.jiandaoyun.metadata.domain.event.FormCreatedEvent;
 import com.jiandaoyun.metadata.domain.repository.FormDefinitionRepository;
 import com.jiandaoyun.shared.kernel.event.DomainEventPublisher;
@@ -22,7 +22,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class FormApplicationService {
 
-    private final FormEngine formEngine;
+    private final FormDomainService formDomainService;
 
     private final FormDefinitionRepository formDefinitionRepository;
 
@@ -31,16 +31,16 @@ public class FormApplicationService {
     /**
      * 构造表单应用服务实例.
      *
-     * @param formEngine 表单引擎.
+     * @param formDomainService 表单领域服务.
      * @param formDefinitionRepository 表单定义仓储.
      * @param domainEventPublisher 领域事件发布器.
      */
     public FormApplicationService(
-        FormEngine formEngine,
+        FormDomainService formDomainService,
         FormDefinitionRepository formDefinitionRepository,
         DomainEventPublisher domainEventPublisher
     ) {
-        this.formEngine = formEngine;
+        this.formDomainService = formDomainService;
         this.formDefinitionRepository = formDefinitionRepository;
         this.domainEventPublisher = domainEventPublisher;
     }
@@ -53,7 +53,7 @@ public class FormApplicationService {
      */
     public FormDefinition create(CreateFormRequest request) {
         String formId = IdGenerator.nextId();
-        FormDefinition formDefinition = formEngine.buildForm(formId, request, Instant.now());
+        FormDefinition formDefinition = formDomainService.buildForm(formId, request, Instant.now());
         formDefinitionRepository.save(formDefinition);
         domainEventPublisher.publish(new FormCreatedEvent(formDefinition.getId(), formDefinition.getName(), Instant.now()));
         return formDefinition;
