@@ -1,7 +1,7 @@
 package com.jiandaoyun.common.constant;
 
 /**
- * 字段类型枚举定义.
+ * 表单字段类型枚举定义.
  *
  * @author chenming
  *
@@ -9,22 +9,22 @@ package com.jiandaoyun.common.constant;
  */
 public enum FieldType {
     /**
-     * TEXT字段.
+     * 文本字段.
      */
     TEXT,
 
     /**
-     * NUMBER字段.
+     * 数值字段.
      */
     NUMBER,
 
     /**
-     * BOOLEAN字段.
+     * 布尔字段.
      */
     BOOLEAN,
 
     /**
-     * 字段说明.
+     * 日期字段.
      */
     DATE
 }

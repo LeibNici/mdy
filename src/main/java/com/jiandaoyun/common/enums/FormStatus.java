@@ -9,17 +9,17 @@ package com.jiandaoyun.common.enums;
  */
 public enum FormStatus {
     /**
-     * DRAFT字段.
+     * 草稿状态，表单尚未发布.
      */
     DRAFT,
 
     /**
-     * PUBLISHED字段.
+     * 已发布状态，表单可用于数据填报.
      */
     PUBLISHED,
 
     /**
-     * 字段说明.
+     * 已归档状态，表单停止使用.
      */
     ARCHIVED
 }

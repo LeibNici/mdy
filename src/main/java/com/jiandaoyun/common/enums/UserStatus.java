@@ -9,17 +9,17 @@ package com.jiandaoyun.common.enums;
  */
 public enum UserStatus {
     /**
-     * ACTIVE字段.
+     * 用户状态正常，可登录并访问系统.
      */
     ACTIVE,
 
     /**
-     * DISABLED字段.
+     * 用户被禁用，禁止登录系统.
      */
     DISABLED,
 
     /**
-     * 字段说明.
+     * 用户被锁定，需解锁后才能继续使用.
      */
     LOCKED
 }

@@ -1,7 +1,7 @@
 package com.jiandaoyun.common.enums;
 
 /**
- * 工作流状态枚举定义.
+ * 工作流实例状态枚举定义.
  *
  * @author chenming
  *
@@ -9,17 +9,17 @@ package com.jiandaoyun.common.enums;
  */
 public enum WorkflowStatus {
     /**
-     * PENDING字段.
+     * 待审批状态.
      */
     PENDING,
 
     /**
-     * APPROVED字段.
+     * 审批通过状态.
      */
     APPROVED,
 
     /**
-     * 字段说明.
+     * 审批驳回状态.
      */
     REJECTED
 }
