@@ -5,6 +5,7 @@ import com.jiandaoyun.shared.kernel.outbox.OutboxRepository;
 import com.jiandaoyun.shared.kernel.outbox.OutboxStatus;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Repository;
  * @since 2026/03/01
  */
 @Repository
+@ConditionalOnProperty(prefix = "app.outbox", name = "mode", havingValue = "memory", matchIfMissing = true)
 public class InMemoryOutboxRepository implements OutboxRepository {
 
     private final CopyOnWriteArrayList<OutboxMessage> store = new CopyOnWriteArrayList<>();
@@ -30,13 +32,31 @@ public class InMemoryOutboxRepository implements OutboxRepository {
     }
 
     /**
-     * 查询全部待投递消息.
+     * 查询待投递消息.
      *
+     * @param limit 返回上限.
      * @return 待投递消息列表.
      */
     @Override
-    public List<OutboxMessage> findPending() {
-        return store.stream().filter(message -> message.getStatus() == OutboxStatus.PENDING).toList();
+    public List<OutboxMessage> findPending(int limit) {
+        return store.stream()
+            .filter(message -> message.getStatus() == OutboxStatus.PENDING)
+            .limit(limit)
+            .toList();
+    }
+
+    /**
+     * 按标识将消息标记为已投递.
+     *
+     * @param messageIds 消息标识列表.
+     */
+    @Override
+    public void markProcessed(List<String> messageIds) {
+        for (OutboxMessage message : store) {
+            if (messageIds.contains(message.getId())) {
+                message.setStatus(OutboxStatus.PROCESSED);
+            }
+        }
     }
 
     /**

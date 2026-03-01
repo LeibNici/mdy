@@ -19,6 +19,8 @@ spring:
 app:
   cors:
     allowed-origins: http://localhost:5173
+  outbox:
+    mode: memory
 
 server:
   port: 8080

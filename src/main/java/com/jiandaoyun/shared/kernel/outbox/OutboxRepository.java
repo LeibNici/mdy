@@ -19,11 +19,19 @@ public interface OutboxRepository {
     void save(OutboxMessage message);
 
     /**
-     * 查询全部待投递消息.
+     * 查询待投递消息.
      *
+     * @param limit 返回上限.
      * @return 待投递消息列表.
      */
-    List<OutboxMessage> findPending();
+    List<OutboxMessage> findPending(int limit);
+
+    /**
+     * 按标识将消息标记为已投递.
+     *
+     * @param messageIds 消息标识列表.
+     */
+    void markProcessed(List<String> messageIds);
 
     /**
      * 查询消息总数.

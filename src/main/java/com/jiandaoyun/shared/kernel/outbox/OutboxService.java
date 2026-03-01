@@ -60,12 +60,22 @@ public class OutboxService {
     }
 
     /**
-     * 查询全部待投递消息.
+     * 查询待投递消息.
      *
+     * @param limit 返回上限.
      * @return 待投递消息列表.
      */
-    public List<OutboxMessage> findPending() {
-        return outboxRepository.findPending();
+    public List<OutboxMessage> findPending(int limit) {
+        return outboxRepository.findPending(limit);
+    }
+
+    /**
+     * 将消息标记为已投递.
+     *
+     * @param messageIds 消息标识列表.
+     */
+    public void markProcessed(List<String> messageIds) {
+        outboxRepository.markProcessed(messageIds);
     }
 
     /**

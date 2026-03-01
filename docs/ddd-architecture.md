@@ -58,6 +58,9 @@ com.jiandaoyun
    - `workflow.instance.approved`
 3. 应用层通过 `DomainEventPublisher` 发布事件，保持跨上下文解耦。
 4. 已接入 `OutboxService` 与 `DomainEventOutboxListener`，领域事件自动写入出箱。
+5. Outbox 支持双实现：
+   - `memory`：默认模式，适配本地开发与 CI。
+   - `jdbc`：数据库模式，依赖 `outbox_message` 表（见 `sql/upgrade/V20260301__outbox_message.sql`）。
 
 ## 后续演进
 
