@@ -5,8 +5,8 @@ import com.jiandaoyun.core.engine.FormEngine;
 import com.jiandaoyun.data.domain.repository.FormDataRecordRepository;
 import com.jiandaoyun.domain.metadata.FormDefinition;
 import com.jiandaoyun.dto.request.SubmitDataRequest;
+import com.jiandaoyun.metadata.application.service.FormApplicationService;
 import com.jiandaoyun.service.core.ValidatorService;
-import com.jiandaoyun.service.metadata.FormService;
 import java.time.Instant;
 import java.util.HashMap;
 import java.util.List;
@@ -23,7 +23,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class DataApplicationService {
 
-    private final FormService formService;
+    private final FormApplicationService formApplicationService;
 
     private final FormEngine formEngine;
 
@@ -34,18 +34,18 @@ public class DataApplicationService {
     /**
      * 构造数据应用服务实例.
      *
-     * @param formService 表单服务.
+     * @param formApplicationService 表单应用服务.
      * @param formEngine 表单引擎.
      * @param validatorService 校验服务.
      * @param formDataRecordRepository 表单数据记录仓储.
      */
     public DataApplicationService(
-        FormService formService,
+        FormApplicationService formApplicationService,
         FormEngine formEngine,
         ValidatorService validatorService,
         FormDataRecordRepository formDataRecordRepository
     ) {
-        this.formService = formService;
+        this.formApplicationService = formApplicationService;
         this.formEngine = formEngine;
         this.validatorService = validatorService;
         this.formDataRecordRepository = formDataRecordRepository;
@@ -58,7 +58,7 @@ public class DataApplicationService {
      * @return 持久化后的记录.
      */
     public Map<String, Object> submit(SubmitDataRequest request) {
-        FormDefinition form = formService.getById(request.getFormId());
+        FormDefinition form = formApplicationService.getById(request.getFormId());
         Map<String, Object> normalizedData = formEngine.normalizeSubmission(form, request.getData());
         validatorService.validateSubmission(form, normalizedData);
 

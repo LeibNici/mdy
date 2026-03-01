@@ -1,11 +1,11 @@
 package com.jiandaoyun.report.infrastructure.adapter;
 
+import com.jiandaoyun.data.application.service.DataApplicationService;
 import com.jiandaoyun.report.domain.repository.ReportDataReader;
-import com.jiandaoyun.service.data.DataService;
 import org.springframework.stereotype.Component;
 
 /**
- * 基于数据服务的报表数据读取实现.
+ * 基于数据应用服务的报表数据读取实现.
  *
  * @author chenming
  *
@@ -14,15 +14,15 @@ import org.springframework.stereotype.Component;
 @Component
 public class DataServiceReportDataReader implements ReportDataReader {
 
-    private final DataService dataService;
+    private final DataApplicationService dataApplicationService;
 
     /**
      * 构造报表数据读取实现实例.
      *
-     * @param dataService 数据服务.
+     * @param dataApplicationService 数据应用服务.
      */
-    public DataServiceReportDataReader(DataService dataService) {
-        this.dataService = dataService;
+    public DataServiceReportDataReader(DataApplicationService dataApplicationService) {
+        this.dataApplicationService = dataApplicationService;
     }
 
     /**
@@ -33,6 +33,6 @@ public class DataServiceReportDataReader implements ReportDataReader {
      */
     @Override
     public long countByFormId(String formId) {
-        return dataService.listByFormId(formId).size();
+        return dataApplicationService.listByFormId(formId).size();
     }
 }

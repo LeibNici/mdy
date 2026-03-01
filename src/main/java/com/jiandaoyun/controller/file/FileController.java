@@ -1,7 +1,7 @@
 package com.jiandaoyun.controller.file;
 
 import com.jiandaoyun.common.model.ApiResponse;
-import com.jiandaoyun.service.file.FileService;
+import com.jiandaoyun.file.application.service.FileApplicationService;
 import java.util.Map;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,15 +18,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/file")
 public class FileController {
 
-    private final FileService fileService;
+    private final FileApplicationService fileApplicationService;
 
     /**
      * 构造文件控制器实例.
      *
-     * @param fileService 文件服务实例.
+     * @param fileApplicationService 文件应用服务实例.
      */
-    public FileController(FileService fileService) {
-        this.fileService = fileService;
+    public FileController(FileApplicationService fileApplicationService) {
+        this.fileApplicationService = fileApplicationService;
     }
 
     /**
@@ -36,6 +36,6 @@ public class FileController {
      */
     @GetMapping("/health")
     public ApiResponse<Map<String, String>> health() {
-        return ApiResponse.ok(fileService.health());
+        return ApiResponse.ok(fileApplicationService.health());
     }
 }

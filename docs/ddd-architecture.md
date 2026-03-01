@@ -20,7 +20,7 @@
 5. `auth`
 6. `file`
 
-兼容适配层保留在 `service/*`，用于承接旧接口并委托到应用服务。
+第二阶段已完成：接口层（controller）直接依赖 `application service`，原业务模块 `service/*` 兼容层已移除。
 
 ## 推荐目录规范
 
@@ -52,4 +52,4 @@ com.jiandaoyun
 
 1. 将内存仓储逐步替换为 MySQL/MongoDB 仓储适配实现。
 2. 按有界上下文补齐领域事件与事件发布机制。
-3. 将接口层逐步直接面向应用服务，最终移除兼容适配层。
+3. 将 `service/core` 共享能力进一步收敛到 `shared-kernel` 目录，统一跨上下文依赖入口。

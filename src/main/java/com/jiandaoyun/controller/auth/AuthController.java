@@ -1,7 +1,7 @@
 package com.jiandaoyun.controller.auth;
 
+import com.jiandaoyun.auth.application.service.AuthApplicationService;
 import com.jiandaoyun.common.model.ApiResponse;
-import com.jiandaoyun.service.auth.AuthService;
 import java.util.Map;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,15 +18,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/auth")
 public class AuthController {
 
-    private final AuthService authService;
+    private final AuthApplicationService authApplicationService;
 
     /**
      * 构造认证控制器实例.
      *
-     * @param authService 认证服务实例.
+     * @param authApplicationService 认证应用服务实例.
      */
-    public AuthController(AuthService authService) {
-        this.authService = authService;
+    public AuthController(AuthApplicationService authApplicationService) {
+        this.authApplicationService = authApplicationService;
     }
 
     /**
@@ -36,6 +36,6 @@ public class AuthController {
      */
     @GetMapping("/health")
     public ApiResponse<Map<String, String>> health() {
-        return ApiResponse.ok(authService.health());
+        return ApiResponse.ok(authApplicationService.health());
     }
 }

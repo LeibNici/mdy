@@ -3,7 +3,7 @@ package com.jiandaoyun.controller.metadata;
 import com.jiandaoyun.common.model.ApiResponse;
 import com.jiandaoyun.domain.metadata.FormDefinition;
 import com.jiandaoyun.dto.request.CreateFormRequest;
-import com.jiandaoyun.service.metadata.FormService;
+import com.jiandaoyun.metadata.application.service.FormApplicationService;
 import jakarta.validation.Valid;
 import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,21 +18,21 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author chenming
  *
- * @since 2026/02/28
+ * @since 2026/03/01
  */
 @RestController
 @RequestMapping("/api/forms")
 public class FormController {
 
-    private final FormService formService;
+    private final FormApplicationService formApplicationService;
 
     /**
      * 构造表单控制器实例.
      *
-     * @param formService 表单服务实例.
+     * @param formApplicationService 表单应用服务实例.
      */
-    public FormController(FormService formService) {
-        this.formService = formService;
+    public FormController(FormApplicationService formApplicationService) {
+        this.formApplicationService = formApplicationService;
     }
 
     /**
@@ -43,7 +43,7 @@ public class FormController {
      */
     @PostMapping
     public ApiResponse<FormDefinition> create(@Valid @RequestBody CreateFormRequest request) {
-        return ApiResponse.ok(formService.create(request));
+        return ApiResponse.ok(formApplicationService.create(request));
     }
 
     /**
@@ -54,7 +54,7 @@ public class FormController {
      */
     @GetMapping("/{formId}")
     public ApiResponse<FormDefinition> getById(@PathVariable String formId) {
-        return ApiResponse.ok(formService.getById(formId));
+        return ApiResponse.ok(formApplicationService.getById(formId));
     }
 
     /**
@@ -64,6 +64,6 @@ public class FormController {
      */
     @GetMapping
     public ApiResponse<List<FormDefinition>> listAll() {
-        return ApiResponse.ok(formService.listAll());
+        return ApiResponse.ok(formApplicationService.listAll());
     }
 }

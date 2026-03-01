@@ -4,7 +4,7 @@ import com.jiandaoyun.common.model.ApiResponse;
 import com.jiandaoyun.domain.workflow.WorkflowInstance;
 import com.jiandaoyun.dto.request.ApproveTaskRequest;
 import com.jiandaoyun.dto.request.StartWorkflowRequest;
-import com.jiandaoyun.service.workflow.WorkflowService;
+import com.jiandaoyun.workflow.application.service.WorkflowApplicationService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,21 +18,21 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author chenming
  *
- * @since 2026/02/28
+ * @since 2026/03/01
  */
 @RestController
 @RequestMapping("/api/workflow")
 public class WorkflowController {
 
-    private final WorkflowService workflowService;
+    private final WorkflowApplicationService workflowApplicationService;
 
     /**
      * 构造工作流控制器实例.
      *
-     * @param workflowService 工作流服务实例.
+     * @param workflowApplicationService 工作流应用服务实例.
      */
-    public WorkflowController(WorkflowService workflowService) {
-        this.workflowService = workflowService;
+    public WorkflowController(WorkflowApplicationService workflowApplicationService) {
+        this.workflowApplicationService = workflowApplicationService;
     }
 
     /**
@@ -43,7 +43,7 @@ public class WorkflowController {
      */
     @PostMapping("/start")
     public ApiResponse<WorkflowInstance> start(@Valid @RequestBody StartWorkflowRequest request) {
-        return ApiResponse.ok(workflowService.start(request));
+        return ApiResponse.ok(workflowApplicationService.start(request));
     }
 
     /**
@@ -54,7 +54,7 @@ public class WorkflowController {
      */
     @PostMapping("/approve")
     public ApiResponse<WorkflowInstance> approve(@Valid @RequestBody ApproveTaskRequest request) {
-        return ApiResponse.ok(workflowService.approve(request));
+        return ApiResponse.ok(workflowApplicationService.approve(request));
     }
 
     /**
@@ -65,6 +65,6 @@ public class WorkflowController {
      */
     @GetMapping("/{instanceId}")
     public ApiResponse<WorkflowInstance> getById(@PathVariable String instanceId) {
-        return ApiResponse.ok(workflowService.getById(instanceId));
+        return ApiResponse.ok(workflowApplicationService.getById(instanceId));
     }
 }
