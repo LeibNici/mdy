@@ -68,6 +68,9 @@ com.jiandaoyun
 7. 已接入 RabbitMQ 通信网关：
    - `delivery-mode=log`：日志投递（默认）。
    - `delivery-mode=rabbit`：通过 RabbitTemplate 投递到交换机。
+8. 已接入 RabbitMQ 消费端与死信拓扑：
+   - `RabbitOutboxEventConsumer` 监听出箱队列并分发到 `OutboxEventHandler`。
+   - 主队列绑定死信交换机，投递异常消息进入死信队列（DLQ）。
 
 ## 后续演进
 

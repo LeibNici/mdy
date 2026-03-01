@@ -20,6 +20,9 @@ spring:
     port: 5672
     username: guest
     password: guest
+    listener:
+      simple:
+        default-requeue-rejected: false
 
 app:
   cors:
@@ -36,6 +39,9 @@ app:
       exchange: jiandaoyun.outbox.exchange
       queue: jiandaoyun.outbox.queue
       routing-key: jiandaoyun.outbox
+      dead-letter-exchange: jiandaoyun.outbox.dlx
+      dead-letter-queue: jiandaoyun.outbox.dlq
+      dead-letter-routing-key: jiandaoyun.outbox.dlq
       auto-declare: true
 
 server:
