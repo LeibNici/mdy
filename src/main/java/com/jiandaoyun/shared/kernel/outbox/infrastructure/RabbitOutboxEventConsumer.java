@@ -1,5 +1,6 @@
 package com.jiandaoyun.shared.kernel.outbox.infrastructure;
 
+import com.jiandaoyun.shared.kernel.outbox.consumer.OutboxConsumeDedupService;
 import com.jiandaoyun.shared.kernel.outbox.consumer.OutboxEventHandler;
 import java.util.List;
 import org.slf4j.Logger;
@@ -26,13 +27,20 @@ public class RabbitOutboxEventConsumer {
 
     private final List<OutboxEventHandler> outboxEventHandlers;
 
+    private final OutboxConsumeDedupService outboxConsumeDedupService;
+
     /**
      * 构造 RabbitMQ 出箱事件消费者实例.
      *
      * @param outboxEventHandlers 事件处理器列表.
+     * @param outboxConsumeDedupService 出箱消费幂等服务.
      */
-    public RabbitOutboxEventConsumer(List<OutboxEventHandler> outboxEventHandlers) {
+    public RabbitOutboxEventConsumer(
+        List<OutboxEventHandler> outboxEventHandlers,
+        OutboxConsumeDedupService outboxConsumeDedupService
+    ) {
         this.outboxEventHandlers = outboxEventHandlers;
+        this.outboxConsumeDedupService = outboxConsumeDedupService;
     }
 
     /**
@@ -49,9 +57,16 @@ public class RabbitOutboxEventConsumer {
         @Header(name = "outboxId", required = false) String outboxId
     ) {
         String safeEventType = eventType == null ? "unknown.event" : eventType;
+
+        if (outboxConsumeDedupService.shouldSkip(outboxId)) {
+            LOGGER.info("skip duplicated outbox message, id={}, type={}", outboxId, safeEventType);
+            return;
+        }
+
         for (OutboxEventHandler handler : outboxEventHandlers) {
             if (handler.supports(safeEventType)) {
                 handler.handle(safeEventType, payload);
+                outboxConsumeDedupService.markConsumed(outboxId);
                 return;
             }
         }

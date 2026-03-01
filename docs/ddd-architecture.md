@@ -71,6 +71,10 @@ com.jiandaoyun
 8. 已接入 RabbitMQ 消费端与死信拓扑：
    - `RabbitOutboxEventConsumer` 监听出箱队列并分发到 `OutboxEventHandler`。
    - 主队列绑定死信交换机，投递异常消息进入死信队列（DLQ）。
+9. 已接入消费幂等机制：
+   - `OutboxConsumeDedupService`
+   - `OutboxConsumeLogRepository`（memory/jdbc）
+   - 按 `outboxId` 去重消费，避免重复处理。
 
 ## 后续演进
 

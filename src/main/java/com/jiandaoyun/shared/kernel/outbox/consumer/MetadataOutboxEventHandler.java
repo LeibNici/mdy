@@ -7,17 +7,17 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 /**
- * 出箱事件日志处理器.
+ * 元数据事件处理器.
  *
  * @author chenming
  *
  * @since 2026/03/01
  */
 @Component
-@Order(Ordered.LOWEST_PRECEDENCE)
-public class LoggingOutboxEventHandler implements OutboxEventHandler {
+@Order(Ordered.HIGHEST_PRECEDENCE)
+public class MetadataOutboxEventHandler implements OutboxEventHandler {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(LoggingOutboxEventHandler.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(MetadataOutboxEventHandler.class);
 
     /**
      * 判断是否支持处理指定事件类型.
@@ -27,7 +27,7 @@ public class LoggingOutboxEventHandler implements OutboxEventHandler {
      */
     @Override
     public boolean supports(String eventType) {
-        return true;
+        return "metadata.form.created".equals(eventType);
     }
 
     /**
@@ -38,6 +38,6 @@ public class LoggingOutboxEventHandler implements OutboxEventHandler {
      */
     @Override
     public void handle(String eventType, String payload) {
-        LOGGER.info("consume outbox event by fallback handler, type={}, payload={}", eventType, payload);
+        LOGGER.info("handle metadata event, type={}, payload={}", eventType, payload);
     }
 }

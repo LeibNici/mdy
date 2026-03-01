@@ -7,17 +7,17 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 /**
- * 出箱事件日志处理器.
+ * 工作流事件处理器.
  *
  * @author chenming
  *
  * @since 2026/03/01
  */
 @Component
-@Order(Ordered.LOWEST_PRECEDENCE)
-public class LoggingOutboxEventHandler implements OutboxEventHandler {
+@Order(Ordered.HIGHEST_PRECEDENCE + 2)
+public class WorkflowOutboxEventHandler implements OutboxEventHandler {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(LoggingOutboxEventHandler.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(WorkflowOutboxEventHandler.class);
 
     /**
      * 判断是否支持处理指定事件类型.
@@ -27,7 +27,7 @@ public class LoggingOutboxEventHandler implements OutboxEventHandler {
      */
     @Override
     public boolean supports(String eventType) {
-        return true;
+        return eventType != null && eventType.startsWith("workflow.instance.");
     }
 
     /**
@@ -38,6 +38,6 @@ public class LoggingOutboxEventHandler implements OutboxEventHandler {
      */
     @Override
     public void handle(String eventType, String payload) {
-        LOGGER.info("consume outbox event by fallback handler, type={}, payload={}", eventType, payload);
+        LOGGER.info("handle workflow event, type={}, payload={}", eventType, payload);
     }
 }

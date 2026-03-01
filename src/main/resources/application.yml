@@ -30,6 +30,9 @@ app:
   outbox:
     mode: memory
     delivery-mode: log
+    consumer:
+      idempotent: true
+      store: memory
     dispatcher:
       enabled: true
       fixed-delay-ms: 5000
