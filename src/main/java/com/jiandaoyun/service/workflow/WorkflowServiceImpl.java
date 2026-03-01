@@ -1,80 +1,62 @@
 package com.jiandaoyun.service.workflow;
 
-import com.jiandaoyun.common.enums.WorkflowStatus;
-import com.jiandaoyun.common.exception.BusinessException;
-import com.jiandaoyun.common.utils.IdGenerator;
 import com.jiandaoyun.domain.workflow.WorkflowInstance;
 import com.jiandaoyun.dto.request.ApproveTaskRequest;
 import com.jiandaoyun.dto.request.StartWorkflowRequest;
-import java.time.Instant;
-import java.util.concurrent.ConcurrentHashMap;
+import com.jiandaoyun.workflow.application.service.WorkflowApplicationService;
 import org.springframework.stereotype.Service;
 
 /**
- * 工作流服务实现.
+ * 工作流服务适配实现.
  *
  * @author chenming
  *
- * @since 2026/02/28
+ * @since 2026/03/01
  */
 @Service
-
 public class WorkflowServiceImpl implements WorkflowService {
 
-    private final ConcurrentHashMap<String, WorkflowInstance> instanceStore = new ConcurrentHashMap<>();
+    private final WorkflowApplicationService workflowApplicationService;
 
     /**
-     * .
+     * 构造工作流服务适配实例.
      *
-     * @param request 请求参数.
-     * @return 处理结果.
+     * @param workflowApplicationService 工作流应用服务.
+     */
+    public WorkflowServiceImpl(WorkflowApplicationService workflowApplicationService) {
+        this.workflowApplicationService = workflowApplicationService;
+    }
+
+    /**
+     * 启动工作流实例.
+     *
+     * @param request 启动流程请求.
+     * @return 新建的工作流实例.
      */
     @Override
     public WorkflowInstance start(StartWorkflowRequest request) {
-        Instant now = Instant.now();
-        WorkflowInstance instance = WorkflowInstance.builder()
-            .id(IdGenerator.nextId())
-            .formId(request.getFormId())
-            .recordId(request.getRecordId())
-            .applicant(request.getApplicant())
-            .currentTaskId(IdGenerator.nextId())
-            .status(WorkflowStatus.PENDING)
-            .createdAt(now)
-            .updatedAt(now)
-            .build();
-        instanceStore.put(instance.getId(), instance);
-        return instance;
+        return workflowApplicationService.start(request);
     }
 
     /**
-     * .
+     * 审批工作流任务.
      *
-     * @param request 请求参数.
-     * @return 处理结果.
+     * @param request 审批任务请求.
+     * @return 审批后的工作流实例.
      */
     @Override
     public WorkflowInstance approve(ApproveTaskRequest request) {
-        WorkflowInstance instance = getById(request.getInstanceId());
-        if (!instance.getCurrentTaskId().equals(request.getTaskId())) {
-            throw new BusinessException("task ID mismatch");
-        }
-        instance.setStatus(Boolean.TRUE.equals(request.getApproved()) ? WorkflowStatus.APPROVED : WorkflowStatus.REJECTED);
-        instance.setUpdatedAt(Instant.now());
-        return instance;
+        return workflowApplicationService.approve(request);
     }
 
     /**
-     * 获取ByID.
+     * 根据标识查询工作流实例.
      *
-     * @param instanceId 主键标识.
-     * @return 处理结果.
+     * @param instanceId 工作流实例标识.
+     * @return 工作流实例.
      */
     @Override
     public WorkflowInstance getById(String instanceId) {
-        WorkflowInstance instance = instanceStore.get(instanceId);
-        if (instance == null) {
-            throw new BusinessException("workflow instance not found: " + instanceId);
-        }
-        return instance;
+        return workflowApplicationService.getById(instanceId);
     }
 }

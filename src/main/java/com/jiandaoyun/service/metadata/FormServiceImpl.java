@@ -1,36 +1,30 @@
 package com.jiandaoyun.service.metadata;
 
-import com.jiandaoyun.common.exception.BusinessException;
-import com.jiandaoyun.common.utils.IdGenerator;
-import com.jiandaoyun.core.engine.FormEngine;
 import com.jiandaoyun.domain.metadata.FormDefinition;
 import com.jiandaoyun.dto.request.CreateFormRequest;
-import java.time.Instant;
+import com.jiandaoyun.metadata.application.service.FormApplicationService;
 import java.util.List;
-import java.util.concurrent.ConcurrentHashMap;
 import org.springframework.stereotype.Service;
 
 /**
- * 表单服务实现.
+ * 表单服务适配实现.
  *
  * @author chenming
  *
- * @since 2026/02/28
+ * @since 2026/03/01
  */
 @Service
 public class FormServiceImpl implements FormService {
 
-    private final FormEngine formEngine;
-
-    private final ConcurrentHashMap<String, FormDefinition> formStore = new ConcurrentHashMap<>();
+    private final FormApplicationService formApplicationService;
 
     /**
-     * 构造表单服务实例.
+     * 构造表单服务适配实例.
      *
-     * @param formEngine 表单引擎实例.
+     * @param formApplicationService 表单应用服务.
      */
-    public FormServiceImpl(FormEngine formEngine) {
-        this.formEngine = formEngine;
+    public FormServiceImpl(FormApplicationService formApplicationService) {
+        this.formApplicationService = formApplicationService;
     }
 
     /**
@@ -41,10 +35,7 @@ public class FormServiceImpl implements FormService {
      */
     @Override
     public FormDefinition create(CreateFormRequest request) {
-        String formId = IdGenerator.nextId();
-        FormDefinition form = formEngine.buildForm(formId, request, Instant.now());
-        formStore.put(formId, form);
-        return form;
+        return formApplicationService.create(request);
     }
 
     /**
@@ -55,11 +46,7 @@ public class FormServiceImpl implements FormService {
      */
     @Override
     public FormDefinition getById(String formId) {
-        FormDefinition form = formStore.get(formId);
-        if (form == null) {
-            throw new BusinessException("form not found: " + formId);
-        }
-        return form;
+        return formApplicationService.getById(formId);
     }
 
     /**
@@ -69,6 +56,6 @@ public class FormServiceImpl implements FormService {
      */
     @Override
     public List<FormDefinition> listAll() {
-        return formStore.values().stream().toList();
+        return formApplicationService.listAll();
     }
 }

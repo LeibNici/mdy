@@ -1,28 +1,28 @@
 package com.jiandaoyun.service.report;
 
 import com.jiandaoyun.dto.response.ReportSummaryResponse;
-import com.jiandaoyun.service.data.DataService;
+import com.jiandaoyun.report.application.service.ReportApplicationService;
 import org.springframework.stereotype.Service;
 
 /**
- * 报表服务实现.
+ * 报表服务适配实现.
  *
  * @author chenming
  *
- * @since 2026/02/28
+ * @since 2026/03/01
  */
 @Service
 public class ReportServiceImpl implements ReportService {
 
-    private final DataService dataService;
+    private final ReportApplicationService reportApplicationService;
 
     /**
-     * 构造报表服务实例.
+     * 构造报表服务适配实例.
      *
-     * @param dataService 数据服务实例.
+     * @param reportApplicationService 报表应用服务.
      */
-    public ReportServiceImpl(DataService dataService) {
-        this.dataService = dataService;
+    public ReportServiceImpl(ReportApplicationService reportApplicationService) {
+        this.reportApplicationService = reportApplicationService;
     }
 
     /**
@@ -33,10 +33,6 @@ public class ReportServiceImpl implements ReportService {
      */
     @Override
     public ReportSummaryResponse getFormSummary(String formId) {
-        long total = dataService.listByFormId(formId).size();
-        return ReportSummaryResponse.builder()
-            .formId(formId)
-            .totalRecords(total)
-            .build();
+        return reportApplicationService.getFormSummary(formId);
     }
 }
