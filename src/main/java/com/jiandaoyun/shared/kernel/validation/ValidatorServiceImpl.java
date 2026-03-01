@@ -1,4 +1,4 @@
-package com.jiandaoyun.service.core;
+package com.jiandaoyun.shared.kernel.validation;
 
 import com.jiandaoyun.common.constant.FieldType;
 import com.jiandaoyun.common.exception.BusinessException;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  *
  * @author chenming
  *
- * @since 2026/02/28
+ * @since 2026/03/01
  */
 @Service
 public class ValidatorServiceImpl implements ValidatorService {

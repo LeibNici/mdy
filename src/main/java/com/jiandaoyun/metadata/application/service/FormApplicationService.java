@@ -5,7 +5,9 @@ import com.jiandaoyun.common.utils.IdGenerator;
 import com.jiandaoyun.core.engine.FormEngine;
 import com.jiandaoyun.domain.metadata.FormDefinition;
 import com.jiandaoyun.dto.request.CreateFormRequest;
+import com.jiandaoyun.metadata.domain.event.FormCreatedEvent;
 import com.jiandaoyun.metadata.domain.repository.FormDefinitionRepository;
+import com.jiandaoyun.shared.kernel.event.DomainEventPublisher;
 import java.time.Instant;
 import java.util.List;
 import org.springframework.stereotype.Service;
@@ -24,18 +26,23 @@ public class FormApplicationService {
 
     private final FormDefinitionRepository formDefinitionRepository;
 
+    private final DomainEventPublisher domainEventPublisher;
+
     /**
      * 构造表单应用服务实例.
      *
      * @param formEngine 表单引擎.
      * @param formDefinitionRepository 表单定义仓储.
+     * @param domainEventPublisher 领域事件发布器.
      */
     public FormApplicationService(
         FormEngine formEngine,
-        FormDefinitionRepository formDefinitionRepository
+        FormDefinitionRepository formDefinitionRepository,
+        DomainEventPublisher domainEventPublisher
     ) {
         this.formEngine = formEngine;
         this.formDefinitionRepository = formDefinitionRepository;
+        this.domainEventPublisher = domainEventPublisher;
     }
 
     /**
@@ -48,6 +55,7 @@ public class FormApplicationService {
         String formId = IdGenerator.nextId();
         FormDefinition formDefinition = formEngine.buildForm(formId, request, Instant.now());
         formDefinitionRepository.save(formDefinition);
+        domainEventPublisher.publish(new FormCreatedEvent(formDefinition.getId(), formDefinition.getName(), Instant.now()));
         return formDefinition;
     }
 

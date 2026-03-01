@@ -48,8 +48,17 @@ com.jiandaoyun
     └── infrastructure
 ```
 
+## 第三阶段进展
+
+1. 已完成 `service/core` 到 `shared-kernel` 的迁移（校验与事件发布能力）。
+2. 已完成领域事件发布链路：
+   - `metadata.form.created`
+   - `data.record.submitted`
+   - `workflow.instance.started`
+   - `workflow.instance.approved`
+3. 应用层通过 `DomainEventPublisher` 发布事件，保持跨上下文解耦。
+
 ## 后续演进
 
-1. 将内存仓储逐步替换为 MySQL/MongoDB 仓储适配实现。
-2. 按有界上下文补齐领域事件与事件发布机制。
-3. 将 `service/core` 共享能力进一步收敛到 `shared-kernel` 目录，统一跨上下文依赖入口。
+1. 将内存仓储逐步替换为 MySQL/MongoDB 仓储适配实现（当前默认内存实现保证本地与 CI 可运行）。
+2. 增加事件监听器与 Outbox 持久化，支持可靠投递。

@@ -2,11 +2,13 @@ package com.jiandaoyun.data.application.service;
 
 import com.jiandaoyun.common.utils.IdGenerator;
 import com.jiandaoyun.core.engine.FormEngine;
+import com.jiandaoyun.data.domain.event.DataSubmittedEvent;
 import com.jiandaoyun.data.domain.repository.FormDataRecordRepository;
 import com.jiandaoyun.domain.metadata.FormDefinition;
 import com.jiandaoyun.dto.request.SubmitDataRequest;
 import com.jiandaoyun.metadata.application.service.FormApplicationService;
-import com.jiandaoyun.service.core.ValidatorService;
+import com.jiandaoyun.shared.kernel.event.DomainEventPublisher;
+import com.jiandaoyun.shared.kernel.validation.ValidatorService;
 import java.time.Instant;
 import java.util.HashMap;
 import java.util.List;
@@ -31,6 +33,8 @@ public class DataApplicationService {
 
     private final FormDataRecordRepository formDataRecordRepository;
 
+    private final DomainEventPublisher domainEventPublisher;
+
     /**
      * 构造数据应用服务实例.
      *
@@ -38,17 +42,20 @@ public class DataApplicationService {
      * @param formEngine 表单引擎.
      * @param validatorService 校验服务.
      * @param formDataRecordRepository 表单数据记录仓储.
+     * @param domainEventPublisher 领域事件发布器.
      */
     public DataApplicationService(
         FormApplicationService formApplicationService,
         FormEngine formEngine,
         ValidatorService validatorService,
-        FormDataRecordRepository formDataRecordRepository
+        FormDataRecordRepository formDataRecordRepository,
+        DomainEventPublisher domainEventPublisher
     ) {
         this.formApplicationService = formApplicationService;
         this.formEngine = formEngine;
         this.validatorService = validatorService;
         this.formDataRecordRepository = formDataRecordRepository;
+        this.domainEventPublisher = domainEventPublisher;
     }
 
     /**
@@ -63,11 +70,13 @@ public class DataApplicationService {
         validatorService.validateSubmission(form, normalizedData);
 
         Map<String, Object> record = new HashMap<>(normalizedData);
-        record.put("id", IdGenerator.nextId());
+        String recordId = IdGenerator.nextId();
+        record.put("id", recordId);
         record.put("formId", request.getFormId());
         record.put("createdAt", Instant.now().toString());
 
         formDataRecordRepository.save(request.getFormId(), record);
+        domainEventPublisher.publish(new DataSubmittedEvent(request.getFormId(), recordId, Instant.now()));
         return record;
     }
 

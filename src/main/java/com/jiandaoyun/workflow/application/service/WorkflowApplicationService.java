@@ -6,6 +6,9 @@ import com.jiandaoyun.common.utils.IdGenerator;
 import com.jiandaoyun.domain.workflow.WorkflowInstance;
 import com.jiandaoyun.dto.request.ApproveTaskRequest;
 import com.jiandaoyun.dto.request.StartWorkflowRequest;
+import com.jiandaoyun.shared.kernel.event.DomainEventPublisher;
+import com.jiandaoyun.workflow.domain.event.WorkflowApprovedEvent;
+import com.jiandaoyun.workflow.domain.event.WorkflowStartedEvent;
 import com.jiandaoyun.workflow.domain.repository.WorkflowInstanceRepository;
 import java.time.Instant;
 import org.springframework.stereotype.Service;
@@ -22,13 +25,20 @@ public class WorkflowApplicationService {
 
     private final WorkflowInstanceRepository workflowInstanceRepository;
 
+    private final DomainEventPublisher domainEventPublisher;
+
     /**
      * 构造工作流应用服务实例.
      *
      * @param workflowInstanceRepository 工作流实例仓储.
+     * @param domainEventPublisher 领域事件发布器.
      */
-    public WorkflowApplicationService(WorkflowInstanceRepository workflowInstanceRepository) {
+    public WorkflowApplicationService(
+        WorkflowInstanceRepository workflowInstanceRepository,
+        DomainEventPublisher domainEventPublisher
+    ) {
         this.workflowInstanceRepository = workflowInstanceRepository;
+        this.domainEventPublisher = domainEventPublisher;
     }
 
     /**
@@ -50,6 +60,7 @@ public class WorkflowApplicationService {
             .updatedAt(now)
             .build();
         workflowInstanceRepository.save(instance);
+        domainEventPublisher.publish(new WorkflowStartedEvent(instance.getId(), instance.getFormId(), Instant.now()));
         return instance;
     }
 
@@ -68,6 +79,12 @@ public class WorkflowApplicationService {
         instance.setStatus(Boolean.TRUE.equals(request.getApproved()) ? WorkflowStatus.APPROVED : WorkflowStatus.REJECTED);
         instance.setUpdatedAt(Instant.now());
         workflowInstanceRepository.save(instance);
+        domainEventPublisher.publish(new WorkflowApprovedEvent(
+            instance.getId(),
+            request.getTaskId(),
+            instance.getStatus().name(),
+            Instant.now()
+        ));
         return instance;
     }
 

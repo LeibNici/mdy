@@ -1,4 +1,4 @@
-package com.jiandaoyun.service.core;
+package com.jiandaoyun.shared.kernel.validation;
 
 import com.jiandaoyun.domain.metadata.FormDefinition;
 import java.util.Map;
@@ -8,7 +8,7 @@ import java.util.Map;
  *
  * @author chenming
  *
- * @since 2026/02/28
+ * @since 2026/03/01
  */
 public interface ValidatorService {
 
