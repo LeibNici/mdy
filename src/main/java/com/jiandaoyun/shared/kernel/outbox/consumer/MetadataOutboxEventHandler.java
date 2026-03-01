@@ -19,6 +19,17 @@ public class MetadataOutboxEventHandler implements OutboxEventHandler {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MetadataOutboxEventHandler.class);
 
+    private final EventProcessLogService eventProcessLogService;
+
+    /**
+     * 构造元数据事件处理器实例.
+     *
+     * @param eventProcessLogService 事件处理日志服务.
+     */
+    public MetadataOutboxEventHandler(EventProcessLogService eventProcessLogService) {
+        this.eventProcessLogService = eventProcessLogService;
+    }
+
     /**
      * 判断是否支持处理指定事件类型.
      *
@@ -39,5 +50,6 @@ public class MetadataOutboxEventHandler implements OutboxEventHandler {
     @Override
     public void handle(String eventType, String payload) {
         LOGGER.info("handle metadata event, type={}, payload={}", eventType, payload);
+        eventProcessLogService.record("MetadataOutboxEventHandler", eventType, payload);
     }
 }

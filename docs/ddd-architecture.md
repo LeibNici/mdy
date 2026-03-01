@@ -75,6 +75,10 @@ com.jiandaoyun
    - `OutboxConsumeDedupService`
    - `OutboxConsumeLogRepository`（memory/jdbc）
    - 按 `outboxId` 去重消费，避免重复处理。
+10. 已接入事件处理日志体系：
+    - `EventProcessLogService`
+    - `EventProcessLogRepository`（memory/jdbc）
+    - 支持按处理器维度统计处理量。
 
 ## 后续演进
 
