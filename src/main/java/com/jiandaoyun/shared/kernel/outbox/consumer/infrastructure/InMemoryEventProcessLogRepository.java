@@ -24,12 +24,31 @@ public class InMemoryEventProcessLogRepository implements EventProcessLogReposit
      *
      * @param handlerName 处理器名称.
      * @param eventType 事件类型.
-     * @param payload 事件载荷.
+     * @param payload 事件负载.
+     * @param outboxId 出箱消息标识.
+     * @param processStatus 处理结果状态.
+     * @param errorMessage 失败原因.
      * @param processedAt 处理时间.
      */
     @Override
-    public void save(String handlerName, String eventType, String payload, Instant processedAt) {
-        records.add(new EventProcessRecord(handlerName, eventType, payload, processedAt));
+    public void save(
+        String handlerName,
+        String eventType,
+        String payload,
+        String outboxId,
+        String processStatus,
+        String errorMessage,
+        Instant processedAt
+    ) {
+        records.add(new EventProcessRecord(
+            handlerName,
+            eventType,
+            payload,
+            outboxId,
+            processStatus,
+            errorMessage,
+            processedAt
+        ));
     }
 
     /**
@@ -44,11 +63,14 @@ public class InMemoryEventProcessLogRepository implements EventProcessLogReposit
     }
 
     /**
-     * 事件处理记录.
+     * 事件处理日志记录.
      *
      * @param handlerName 处理器名称.
      * @param eventType 事件类型.
-     * @param payload 事件载荷.
+     * @param payload 事件负载.
+     * @param outboxId 出箱消息标识.
+     * @param processStatus 处理结果状态.
+     * @param errorMessage 失败原因.
      * @param processedAt 处理时间.
      *
      * @author chenming
@@ -59,6 +81,9 @@ public class InMemoryEventProcessLogRepository implements EventProcessLogReposit
         String handlerName,
         String eventType,
         String payload,
+        String outboxId,
+        String processStatus,
+        String errorMessage,
         Instant processedAt
     ) {
     }

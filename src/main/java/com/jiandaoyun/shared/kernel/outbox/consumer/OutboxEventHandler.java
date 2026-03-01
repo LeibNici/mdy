@@ -21,7 +21,7 @@ public interface OutboxEventHandler {
      * 处理事件消息.
      *
      * @param eventType 事件类型.
-     * @param payload 事件载荷.
+     * @param payload 事件负载.
      */
     void handle(String eventType, String payload);
 }

@@ -7,7 +7,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 /**
- * 出箱事件日志处理器.
+ * 兜底事件日志处理器.
  *
  * @author chenming
  *
@@ -20,10 +20,10 @@ public class LoggingOutboxEventHandler implements OutboxEventHandler {
     private static final Logger LOGGER = LoggerFactory.getLogger(LoggingOutboxEventHandler.class);
 
     /**
-     * 判断是否支持处理指定事件类型.
+     * 兜底处理器接收所有事件.
      *
      * @param eventType 事件类型.
-     * @return 是否支持处理.
+     * @return 始终返回 true.
      */
     @Override
     public boolean supports(String eventType) {
@@ -31,10 +31,10 @@ public class LoggingOutboxEventHandler implements OutboxEventHandler {
     }
 
     /**
-     * 处理事件消息.
+     * 记录未被专用处理器消费的事件.
      *
      * @param eventType 事件类型.
-     * @param payload 事件载荷.
+     * @param payload 事件负载.
      */
     @Override
     public void handle(String eventType, String payload) {

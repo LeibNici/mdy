@@ -1,5 +1,6 @@
 package com.jiandaoyun.shared.kernel.outbox.infrastructure;
 
+import com.jiandaoyun.shared.kernel.outbox.consumer.EventProcessLogService;
 import com.jiandaoyun.shared.kernel.outbox.consumer.OutboxConsumeDedupService;
 import com.jiandaoyun.shared.kernel.outbox.consumer.OutboxEventHandler;
 import java.util.List;
@@ -29,26 +30,32 @@ public class RabbitOutboxEventConsumer {
 
     private final OutboxConsumeDedupService outboxConsumeDedupService;
 
+    private final EventProcessLogService eventProcessLogService;
+
     /**
      * 构造 RabbitMQ 出箱事件消费者实例.
      *
      * @param outboxEventHandlers 事件处理器列表.
      * @param outboxConsumeDedupService 出箱消费幂等服务.
+     * @param eventProcessLogService 事件处理日志服务.
      */
     public RabbitOutboxEventConsumer(
         List<OutboxEventHandler> outboxEventHandlers,
-        OutboxConsumeDedupService outboxConsumeDedupService
+        OutboxConsumeDedupService outboxConsumeDedupService,
+        EventProcessLogService eventProcessLogService
     ) {
         this.outboxEventHandlers = outboxEventHandlers;
         this.outboxConsumeDedupService = outboxConsumeDedupService;
+        this.eventProcessLogService = eventProcessLogService;
     }
 
     /**
      * 消费出箱事件消息.
      *
-     * @param payload 消息载荷.
+     * @param payload 消息负载.
      * @param eventType 事件类型.
      * @param outboxId 出箱消息标识.
+     * @throws IllegalStateException 未找到可处理当前事件类型的处理器.
      */
     @RabbitListener(queues = "${app.outbox.rabbit.queue:jiandaoyun.outbox.queue}")
     public void consume(
@@ -65,11 +72,46 @@ public class RabbitOutboxEventConsumer {
 
         for (OutboxEventHandler handler : outboxEventHandlers) {
             if (handler.supports(safeEventType)) {
-                handler.handle(safeEventType, payload);
-                outboxConsumeDedupService.markConsumed(outboxId);
+                processWithHandler(handler, safeEventType, payload, outboxId);
                 return;
             }
         }
-        LOGGER.warn("no outbox event handler found, id={}, type={}", outboxId, safeEventType);
+
+        String errorMessage = "No matched outbox event handler";
+        eventProcessLogService.recordFailure(
+            "UnknownOutboxEventHandler",
+            safeEventType,
+            payload,
+            outboxId,
+            errorMessage
+        );
+        throw new IllegalStateException(errorMessage + ", type=" + safeEventType);
+    }
+
+    /**
+     * 使用指定处理器处理消息并记录处理日志.
+     *
+     * @param handler 事件处理器.
+     * @param eventType 事件类型.
+     * @param payload 事件负载.
+     * @param outboxId 出箱消息标识.
+     * @throws RuntimeException 事件处理器执行失败.
+     */
+    private void processWithHandler(OutboxEventHandler handler, String eventType, String payload, String outboxId) {
+        String handlerName = handler.getClass().getSimpleName();
+        try {
+            handler.handle(eventType, payload);
+            eventProcessLogService.recordSuccess(handlerName, eventType, payload, outboxId);
+            outboxConsumeDedupService.markConsumed(outboxId);
+        } catch (RuntimeException exception) {
+            eventProcessLogService.recordFailure(
+                handlerName,
+                eventType,
+                payload,
+                outboxId,
+                exception.getMessage()
+            );
+            throw exception;
+        }
     }
 }

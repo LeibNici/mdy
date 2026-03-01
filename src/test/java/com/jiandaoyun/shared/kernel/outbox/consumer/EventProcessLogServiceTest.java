@@ -13,12 +13,24 @@ import org.junit.jupiter.api.Test;
 class EventProcessLogServiceTest {
 
     @Test
-    void shouldRecordHandlerLog() {
+    void shouldRecordSuccessAndFailureLog() {
         EventProcessLogService service = new EventProcessLogService(new InMemoryEventProcessLogRepository());
-        service.record("MetadataOutboxEventHandler", "metadata.form.created", "{\"formId\":\"1\"}");
+        service.recordSuccess(
+            "MetadataOutboxEventHandler",
+            "metadata.form.created",
+            "{\"formId\":\"1\"}",
+            "outbox-1"
+        );
+        service.recordFailure(
+            "MetadataOutboxEventHandler",
+            "metadata.form.created",
+            "{\"formId\":\"1\"}",
+            "outbox-1",
+            "test failure"
+        );
 
-        if (service.countByHandler("MetadataOutboxEventHandler") != 1) {
-            throw new IllegalStateException("handler log count should be 1");
+        if (service.countByHandler("MetadataOutboxEventHandler") != 2) {
+            throw new IllegalStateException("handler log count should be 2");
         }
     }
 }

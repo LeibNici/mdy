@@ -1,7 +1,9 @@
 package com.jiandaoyun.shared.kernel.outbox.infrastructure;
 
+import com.jiandaoyun.shared.kernel.outbox.consumer.EventProcessLogService;
 import com.jiandaoyun.shared.kernel.outbox.consumer.OutboxConsumeDedupService;
 import com.jiandaoyun.shared.kernel.outbox.consumer.OutboxEventHandler;
+import com.jiandaoyun.shared.kernel.outbox.consumer.infrastructure.InMemoryEventProcessLogRepository;
 import com.jiandaoyun.shared.kernel.outbox.consumer.infrastructure.InMemoryOutboxConsumeLogRepository;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -33,7 +35,13 @@ class RabbitOutboxEventConsumerTest {
 
         OutboxConsumeDedupService dedupService =
             new OutboxConsumeDedupService(new InMemoryOutboxConsumeLogRepository(), true);
-        RabbitOutboxEventConsumer consumer = new RabbitOutboxEventConsumer(List.of(handler), dedupService);
+        EventProcessLogService logService =
+            new EventProcessLogService(new InMemoryEventProcessLogRepository());
+        RabbitOutboxEventConsumer consumer = new RabbitOutboxEventConsumer(
+            List.of(handler),
+            dedupService,
+            logService
+        );
 
         consumer.consume("{\"id\":\"1\"}", "data.record.submitted", "outbox-1");
         consumer.consume("{\"id\":\"1\"}", "data.record.submitted", "outbox-1");

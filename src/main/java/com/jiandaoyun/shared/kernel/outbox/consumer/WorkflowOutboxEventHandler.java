@@ -19,17 +19,6 @@ public class WorkflowOutboxEventHandler implements OutboxEventHandler {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(WorkflowOutboxEventHandler.class);
 
-    private final EventProcessLogService eventProcessLogService;
-
-    /**
-     * 构造工作流事件处理器实例.
-     *
-     * @param eventProcessLogService 事件处理日志服务.
-     */
-    public WorkflowOutboxEventHandler(EventProcessLogService eventProcessLogService) {
-        this.eventProcessLogService = eventProcessLogService;
-    }
-
     /**
      * 判断是否支持处理指定事件类型.
      *
@@ -42,14 +31,13 @@ public class WorkflowOutboxEventHandler implements OutboxEventHandler {
     }
 
     /**
-     * 处理事件消息.
+     * 处理工作流实例事件.
      *
      * @param eventType 事件类型.
-     * @param payload 事件载荷.
+     * @param payload 事件负载.
      */
     @Override
     public void handle(String eventType, String payload) {
         LOGGER.info("handle workflow event, type={}, payload={}", eventType, payload);
-        eventProcessLogService.record("WorkflowOutboxEventHandler", eventType, payload);
     }
 }

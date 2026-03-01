@@ -3,6 +3,7 @@ package com.jiandaoyun.shared.kernel.outbox.infrastructure;
 import com.jiandaoyun.shared.kernel.outbox.consumer.EventProcessLogService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -37,18 +38,33 @@ public class RabbitOutboxDeadLetterConsumer {
     /**
      * 消费死信队列消息.
      *
-     * @param payload 消息载荷.
+     * @param payload 消息负载.
      * @param eventType 事件类型.
      * @param outboxId 出箱消息标识.
+     * @param message 原始消息.
      */
     @RabbitListener(queues = "${app.outbox.rabbit.dead-letter-queue:jiandaoyun.outbox.dlq}")
     public void consumeDeadLetter(
         String payload,
         @Header(name = "eventType", required = false) String eventType,
-        @Header(name = "outboxId", required = false) String outboxId
+        @Header(name = "outboxId", required = false) String outboxId,
+        Message message
     ) {
         String safeEventType = eventType == null ? "unknown.event" : eventType;
-        LOGGER.error("consume dead-letter outbox message, id={}, type={}", outboxId, safeEventType);
-        eventProcessLogService.record("DeadLetterOutboxConsumer", safeEventType, payload);
+        String cause = message.getMessageProperties().getHeader("x-first-death-reason");
+        String errorMessage = cause == null ? "dead-letter routed" : cause;
+        LOGGER.error(
+            "consume dead-letter outbox message, id={}, type={}, reason={}",
+            outboxId,
+            safeEventType,
+            errorMessage
+        );
+        eventProcessLogService.recordDeadLetter(
+            "DeadLetterOutboxConsumer",
+            safeEventType,
+            payload,
+            outboxId,
+            errorMessage
+        );
     }
 }

@@ -37,16 +37,44 @@ public class JdbcEventProcessLogRepository implements EventProcessLogRepository 
      *
      * @param handlerName 处理器名称.
      * @param eventType 事件类型.
-     * @param payload 事件载荷.
+     * @param payload 事件负载.
+     * @param outboxId 出箱消息标识.
+     * @param processStatus 处理结果状态.
+     * @param errorMessage 失败原因.
      * @param processedAt 处理时间.
      */
     @Override
-    public void save(String handlerName, String eventType, String payload, Instant processedAt) {
+    public void save(
+        String handlerName,
+        String eventType,
+        String payload,
+        String outboxId,
+        String processStatus,
+        String errorMessage,
+        Instant processedAt
+    ) {
         String sql = """
-            INSERT INTO event_process_log (handler_name, event_type, payload, processed_at)
-            VALUES (?, ?, ?, ?)
+            INSERT INTO event_process_log (
+                handler_name,
+                event_type,
+                payload,
+                outbox_id,
+                process_status,
+                error_message,
+                processed_at
+            )
+            VALUES (?, ?, ?, ?, ?, ?, ?)
             """;
-        jdbcTemplate.update(sql, handlerName, eventType, payload, Timestamp.from(processedAt));
+        jdbcTemplate.update(
+            sql,
+            handlerName,
+            eventType,
+            payload,
+            outboxId,
+            processStatus,
+            errorMessage,
+            Timestamp.from(processedAt)
+        );
     }
 
     /**
