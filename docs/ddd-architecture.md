@@ -57,6 +57,7 @@ com.jiandaoyun
    - `workflow.instance.started`
    - `workflow.instance.approved`
 3. 应用层通过 `DomainEventPublisher` 发布事件，保持跨上下文解耦。
+4. 已接入 `OutboxService` 与 `DomainEventOutboxListener`，领域事件自动写入出箱。
 
 ## 后续演进
 

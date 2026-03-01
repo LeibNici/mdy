@@ -2,6 +2,7 @@ package com.jiandaoyun.controller;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.jiandaoyun.shared.kernel.outbox.OutboxService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -31,6 +32,9 @@ class FormDataFlowTest {
 
     @Autowired
     private ObjectMapper objectMapper;
+
+    @Autowired
+    private OutboxService outboxService;
 
     @Test
     void shouldCreateFormAndSubmitData() throws Exception {
@@ -144,5 +148,44 @@ class FormDataFlowTest {
             .andExpect(status().isBadRequest())
             .andExpect(jsonPath("$.code").value(400))
             .andExpect(jsonPath("$.message").value("unknown field: extra"));
+    }
+
+    @Test
+    void shouldAppendOutboxMessages() throws Exception {
+        long before = outboxService.count();
+        String createFormBody = """
+            {
+              "name": "event_form",
+              "fields": [
+                {"key":"title","label":"title","type":"TEXT","required":true}
+              ]
+            }
+            """;
+
+        MvcResult formResult = mockMvc.perform(post("/api/forms")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(createFormBody))
+            .andExpect(status().isOk())
+            .andReturn();
+
+        String formId = objectMapper.readTree(formResult.getResponse().getContentAsString())
+            .path("data").path("id").asText();
+
+        String submitBody = """
+            {
+              "formId": "%s",
+              "data": {"title":"contract"}
+            }
+            """.formatted(formId);
+
+        mockMvc.perform(post("/api/data/submit")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(submitBody))
+            .andExpect(status().isOk());
+
+        long after = outboxService.count();
+        if (after < before + 2) {
+            throw new IllegalStateException("outbox message count should increase by at least 2");
+        }
     }
 }
