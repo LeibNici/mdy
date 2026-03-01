@@ -188,4 +188,20 @@ class FormDataFlowTest {
             throw new IllegalStateException("outbox message count should increase by at least 2");
         }
     }
+
+    @Test
+    void shouldExposeOutboxOpsApis() throws Exception {
+        mockMvc.perform(get("/api/outbox/stats"))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.code").value(200))
+            .andExpect(jsonPath("$.data.totalCount").exists())
+            .andExpect(jsonPath("$.data.pendingCount").exists())
+            .andExpect(jsonPath("$.data.processedCount").exists())
+            .andExpect(jsonPath("$.data.failedCount").exists());
+
+        mockMvc.perform(post("/api/outbox/dispatch"))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.code").value(200))
+            .andExpect(jsonPath("$.data.dispatched").value(true));
+    }
 }

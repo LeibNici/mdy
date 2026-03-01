@@ -79,6 +79,12 @@ com.jiandaoyun
     - `EventProcessLogService`
     - `EventProcessLogRepository`（memory/jdbc）
     - 支持按处理器维度统计处理量。
+11. 已提供出箱运维接口：
+    - `GET /api/outbox/stats`
+    - `POST /api/outbox/dispatch`
+12. RabbitMQ 死信消费已接入：
+    - `RabbitOutboxDeadLetterConsumer`
+    - 死信消息会进入处理日志统计。
 
 ## 后续演进
 
