@@ -4,6 +4,7 @@ import com.jiandaoyun.shared.kernel.outbox.OutboxDeliveryGateway;
 import com.jiandaoyun.shared.kernel.outbox.OutboxMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 /**
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Component;
  * @since 2026/03/01
  */
 @Component
+@ConditionalOnProperty(prefix = "app.outbox", name = "delivery-mode", havingValue = "log", matchIfMissing = true)
 public class LoggingOutboxDeliveryGateway implements OutboxDeliveryGateway {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(LoggingOutboxDeliveryGateway.class);

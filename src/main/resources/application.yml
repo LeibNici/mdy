@@ -15,17 +15,28 @@ spring:
     redis:
       host: localhost
       port: 6379
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
 
 app:
   cors:
     allowed-origins: http://localhost:5173
   outbox:
     mode: memory
+    delivery-mode: log
     dispatcher:
       enabled: true
       fixed-delay-ms: 5000
       batch-size: 100
       max-retry: 3
+    rabbit:
+      exchange: jiandaoyun.outbox.exchange
+      queue: jiandaoyun.outbox.queue
+      routing-key: jiandaoyun.outbox
+      auto-declare: true
 
 server:
   port: 8080

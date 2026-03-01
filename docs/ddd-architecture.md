@@ -65,6 +65,9 @@ com.jiandaoyun
    - `OutboxDispatcher`
    - `OutboxDeliveryGateway`
    - `PENDING/PROCESSED/FAILED` 状态流转
+7. 已接入 RabbitMQ 通信网关：
+   - `delivery-mode=log`：日志投递（默认）。
+   - `delivery-mode=rabbit`：通过 RabbitTemplate 投递到交换机。
 
 ## 后续演进
 
