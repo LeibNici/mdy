@@ -2,6 +2,7 @@ package com.jiandaoyun;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
  * 应用类型.
@@ -11,6 +12,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @since 2026/02/28
  */
 @SpringBootApplication
+@EnableScheduling
 
 public class Application {
 

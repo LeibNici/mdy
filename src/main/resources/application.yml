@@ -21,6 +21,11 @@ app:
     allowed-origins: http://localhost:5173
   outbox:
     mode: memory
+    dispatcher:
+      enabled: true
+      fixed-delay-ms: 5000
+      batch-size: 100
+      max-retry: 3
 
 server:
   port: 8080

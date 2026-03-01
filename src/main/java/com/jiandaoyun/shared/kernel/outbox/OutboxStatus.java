@@ -16,5 +16,10 @@ public enum OutboxStatus {
     /**
      * 已投递状态.
      */
-    PROCESSED
+    PROCESSED,
+
+    /**
+     * 投递失败状态.
+     */
+    FAILED
 }

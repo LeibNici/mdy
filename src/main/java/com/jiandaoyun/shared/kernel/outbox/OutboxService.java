@@ -54,6 +54,8 @@ public class OutboxService {
             .payload(payload)
             .occurredOn(event.occurredOn())
             .createdAt(Instant.now())
+            .retryCount(0)
+            .lastError(null)
             .status(OutboxStatus.PENDING)
             .build();
         outboxRepository.save(message);
@@ -76,6 +78,27 @@ public class OutboxService {
      */
     public void markProcessed(List<String> messageIds) {
         outboxRepository.markProcessed(messageIds);
+    }
+
+    /**
+     * 记录投递失败并更新重试次数.
+     *
+     * @param messageId 消息标识.
+     * @param errorMessage 错误信息.
+     * @param maxRetry 最大重试次数.
+     */
+    public void recordFailure(String messageId, String errorMessage, int maxRetry) {
+        outboxRepository.recordFailure(messageId, errorMessage, maxRetry);
+    }
+
+    /**
+     * 按状态统计消息数量.
+     *
+     * @param status 出箱状态.
+     * @return 消息数量.
+     */
+    public long countByStatus(OutboxStatus status) {
+        return outboxRepository.countByStatus(status);
     }
 
     /**

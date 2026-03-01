@@ -61,6 +61,10 @@ com.jiandaoyun
 5. Outbox 支持双实现：
    - `memory`：默认模式，适配本地开发与 CI。
    - `jdbc`：数据库模式，依赖 `outbox_message` 表（见 `sql/upgrade/V20260301__outbox_message.sql`）。
+6. 已接入 Outbox 调度投递器（批处理、重试、失败标记）：
+   - `OutboxDispatcher`
+   - `OutboxDeliveryGateway`
+   - `PENDING/PROCESSED/FAILED` 状态流转
 
 ## 后续演进
 

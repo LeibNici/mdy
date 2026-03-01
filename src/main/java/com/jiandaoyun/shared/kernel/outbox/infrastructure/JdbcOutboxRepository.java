@@ -6,6 +6,7 @@ import com.jiandaoyun.shared.kernel.outbox.OutboxStatus;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
@@ -50,8 +51,8 @@ public class JdbcOutboxRepository implements OutboxRepository {
     public void save(OutboxMessage message) {
         String sql = """
             INSERT INTO outbox_message
-            (id, event_type, payload, occurred_on, created_at, status)
-            VALUES (?, ?, ?, ?, ?, ?)
+            (id, event_type, payload, occurred_on, created_at, processed_at, retry_count, last_error, status)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
             """;
         jdbcTemplate.update(
             sql,
@@ -60,6 +61,9 @@ public class JdbcOutboxRepository implements OutboxRepository {
             message.getPayload(),
             Timestamp.from(message.getOccurredOn()),
             Timestamp.from(message.getCreatedAt()),
+            null,
+            message.getRetryCount(),
+            message.getLastError(),
             message.getStatus().name()
         );
     }
@@ -73,7 +77,7 @@ public class JdbcOutboxRepository implements OutboxRepository {
     @Override
     public List<OutboxMessage> findPending(int limit) {
         String sql = """
-            SELECT id, event_type, payload, occurred_on, created_at, status
+            SELECT id, event_type, payload, occurred_on, created_at, processed_at, retry_count, last_error, status
             FROM outbox_message
             WHERE status = ?
             ORDER BY created_at ASC
@@ -95,12 +99,52 @@ public class JdbcOutboxRepository implements OutboxRepository {
         StringJoiner placeholders = new StringJoiner(", ");
         List<Object> args = new ArrayList<>();
         args.add(OutboxStatus.PROCESSED.name());
+        args.add(Timestamp.from(Instant.now()));
         for (String id : messageIds) {
             placeholders.add("?");
             args.add(id);
         }
-        String sql = "UPDATE outbox_message SET status = ? WHERE id IN (" + placeholders + ")";
+        String sql = "UPDATE outbox_message SET status = ?, processed_at = ? WHERE id IN (" + placeholders + ")";
         jdbcTemplate.update(sql, args.toArray());
+    }
+
+    /**
+     * 记录投递失败并更新重试次数.
+     *
+     * @param messageId 消息标识.
+     * @param errorMessage 错误信息.
+     * @param maxRetry 最大重试次数.
+     */
+    @Override
+    public void recordFailure(String messageId, String errorMessage, int maxRetry) {
+        String sql = """
+            UPDATE outbox_message
+            SET retry_count = retry_count + 1,
+                last_error = ?,
+                status = CASE WHEN retry_count + 1 >= ? THEN ? ELSE ? END
+            WHERE id = ?
+            """;
+        jdbcTemplate.update(
+            sql,
+            errorMessage,
+            maxRetry,
+            OutboxStatus.FAILED.name(),
+            OutboxStatus.PENDING.name(),
+            messageId
+        );
+    }
+
+    /**
+     * 按状态统计消息数量.
+     *
+     * @param status 出箱状态.
+     * @return 消息数量.
+     */
+    @Override
+    public long countByStatus(OutboxStatus status) {
+        String sql = "SELECT COUNT(1) FROM outbox_message WHERE status = ?";
+        Long count = jdbcTemplate.queryForObject(sql, Long.class, status.name());
+        return count == null ? 0L : count;
     }
 
     /**
@@ -134,12 +178,16 @@ public class JdbcOutboxRepository implements OutboxRepository {
          */
         @Override
         public OutboxMessage mapRow(ResultSet resultSet, int rowNum) throws SQLException {
+            Timestamp processedAt = resultSet.getTimestamp("processed_at");
             return OutboxMessage.builder()
                 .id(resultSet.getString("id"))
                 .eventType(resultSet.getString("event_type"))
                 .payload(resultSet.getString("payload"))
                 .occurredOn(resultSet.getTimestamp("occurred_on").toInstant())
                 .createdAt(resultSet.getTimestamp("created_at").toInstant())
+                .processedAt(processedAt == null ? null : processedAt.toInstant())
+                .retryCount(resultSet.getInt("retry_count"))
+                .lastError(resultSet.getString("last_error"))
                 .status(OutboxStatus.valueOf(resultSet.getString("status")))
                 .build();
         }

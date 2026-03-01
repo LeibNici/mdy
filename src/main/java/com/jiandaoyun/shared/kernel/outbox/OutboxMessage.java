@@ -25,5 +25,11 @@ public class OutboxMessage {
 
     private Instant createdAt;
 
+    private Instant processedAt;
+
+    private int retryCount;
+
+    private String lastError;
+
     private OutboxStatus status;
 }

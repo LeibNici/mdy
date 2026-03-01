@@ -5,6 +5,9 @@ CREATE TABLE IF NOT EXISTS outbox_message (
     payload TEXT NOT NULL,
     occurred_on TIMESTAMP NOT NULL,
     created_at TIMESTAMP NOT NULL,
+    processed_at TIMESTAMP NULL,
+    retry_count INT NOT NULL DEFAULT 0,
+    last_error VARCHAR(512) NULL,
     status VARCHAR(32) NOT NULL
 );
 

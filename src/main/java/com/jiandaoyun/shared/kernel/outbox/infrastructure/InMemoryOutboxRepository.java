@@ -3,6 +3,7 @@ package com.jiandaoyun.shared.kernel.outbox.infrastructure;
 import com.jiandaoyun.shared.kernel.outbox.OutboxMessage;
 import com.jiandaoyun.shared.kernel.outbox.OutboxRepository;
 import com.jiandaoyun.shared.kernel.outbox.OutboxStatus;
+import java.time.Instant;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -55,8 +56,42 @@ public class InMemoryOutboxRepository implements OutboxRepository {
         for (OutboxMessage message : store) {
             if (messageIds.contains(message.getId())) {
                 message.setStatus(OutboxStatus.PROCESSED);
+                message.setProcessedAt(Instant.now());
             }
         }
+    }
+
+    /**
+     * 记录投递失败并更新重试次数.
+     *
+     * @param messageId 消息标识.
+     * @param errorMessage 错误信息.
+     * @param maxRetry 最大重试次数.
+     */
+    @Override
+    public void recordFailure(String messageId, String errorMessage, int maxRetry) {
+        for (OutboxMessage message : store) {
+            if (!message.getId().equals(messageId)) {
+                continue;
+            }
+            int currentRetry = message.getRetryCount() + 1;
+            message.setRetryCount(currentRetry);
+            message.setLastError(errorMessage);
+            if (currentRetry >= maxRetry) {
+                message.setStatus(OutboxStatus.FAILED);
+            }
+        }
+    }
+
+    /**
+     * 按状态统计消息数量.
+     *
+     * @param status 出箱状态.
+     * @return 消息数量.
+     */
+    @Override
+    public long countByStatus(OutboxStatus status) {
+        return store.stream().filter(message -> message.getStatus() == status).count();
     }
 
     /**
